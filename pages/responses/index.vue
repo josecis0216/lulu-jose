@@ -71,6 +71,7 @@ export default {
                 this.error = new Error(error.message || 'Failed to get data')
             }
             this.isLoading = false
+            // console.log(this.$store.getters.requestsCount);
         },
     },
 }

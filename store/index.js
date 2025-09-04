@@ -3,6 +3,7 @@ export default {
         return {
             requests: [],
             addresses: [],
+            guests: [],
         };
     },
     mutations: {
@@ -11,12 +12,18 @@ export default {
         },
         setRequests(state, payload) {
             state.requests = payload;
-        }, 
+        },
         addAddress(state, payload) {
             state.addresses.push(payload);
         },
         setAddresses(state, payload) {
             state.addresses = payload;
+        },
+        addGuests(state, payload) {
+            state.guests.push(payload);
+        },
+        setGuests(state, payload) {
+            state.guests = payload;
         }
     },
     actions: {
@@ -29,7 +36,7 @@ export default {
             };
             // const response = await fetch(`https://clarissa-carlos-default-rtdb.firebaseio.com/newRequests.json`, { // fetch(`https://vue-practice-88f8e-default-rtdb.firebaseio.com/requests/requests.json`
             const response = await fetch(`https://clarissa-carlos-default-rtdb.firebaseio.com/newRequests.json`, {
-            method: 'POST',
+                method: 'POST',
                 body: JSON.stringify(requestData)
             })
 
@@ -68,8 +75,31 @@ export default {
             }
             context.commit('setRequests', requests);
         },
+        async addGuests(context, payload) {
+            const requestData = {
+                user_id: payload.user_id,
+                name: payload.name,
+                additionalGuests: payload.additionalGuests,
+                //   message: payload.message,
+            };
+            const response = await fetch(`https://clarissa-carlos-default-rtdb.firebaseio.com/guests.json`, {
+                method: 'POST',
+                body: JSON.stringify(requestData)
+            })
+
+            const responseData = await response.json();
+
+            if (!response.ok) {
+                const error = new Error(responseData.message || 'failed to send request.');
+                throw error;
+            }
+
+            requestData.id = responseData.name;
+
+            context.commit('addGuests', requestData);
+        },
         async loadGuests(context) {
-            const response = await fetch(`https://clarissa-carlos-default-rtdb.firebaseio.com/guests.json`);  // fetch(`https://vue-practice-88f8e-default-rtdb.firebaseio.com/requests/requests.json`)
+            const response = await fetch(`https://clarissa-carlos-default-rtdb.firebaseio.com/guests.json`);  // fetch(`https://vue-practice-88f8e-default-rtdb.firebaseio.com/requests/requests.json`)            
 
             const responseData = await response.json();
 
@@ -78,18 +108,18 @@ export default {
                 throw error;
             }
 
-            const requests = [];
+            const guests = [];
             for (const key in responseData) {
                 const requestData = {
                     id: key,
-                    fullName: responseData[key].fullName,
-                    brideOrGroom: responseData[key].brideOrGroom,
-                    guests: responseData[key].guests
+                    user_id: responseData[key].user_id,
+                    name: responseData[key].name,
+                    additionalGuests: responseData[key].additionalGuests
                 };
-                requests.push(requestData);
+                guests.push(requestData);
                 // console.log(requestData);
             }
-            context.commit('setRequests', requests);
+            context.commit('setGuests', guests);
         },
         async saveAddress(context, payload) {
             const requestData = {
@@ -126,11 +156,17 @@ export default {
         hasRequests(_, getters) {
             return getters.requests && getters.requests.length > 0;
         },
+        requestsCount(_, getters) {
+            return getters.requests.length;
+        },
         addresses(state) {
             return state.addresses;
         },
         hasAddresses(_, getters) {
             return getters.addresses && getters.addresses.length > 0;
+        },
+        guestCount(_, getters) {
+            return getters.guests.length;
         }
     },
 };
