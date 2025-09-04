@@ -1,9 +1,9 @@
 <template>
   <div>
     <div>
-      <h1 class="over-text fade-in">Clarissa & Carlos</h1>
-      <p class="home-details">June 24, 2023 <br />SALT LAKE CITY, UT</p>
-      <P class="home-details">{{ daysToGo }} DAYS TO GO!</P>
+      <h1 class="over-text fade-in">Lupita & Jose</h1>
+      <p class="home-details">April 18, 2026 <br />SALT LAKE CITY, UT</p>
+      <P class="home-details">{{ daysToGo }} DAYS TO GO</P>
     </div>
     <b-navbar>
       <b-navbar-nav class="m-auto">
@@ -11,6 +11,7 @@
         <nuxt-link to="/rsvp" class="nav-link">RSVP</nuxt-link>
         <nuxt-link to="/story" class="nav-link">OUR STORY</nuxt-link>
         <nuxt-link to="/qa" class="nav-link">Q + A</nuxt-link>
+        <nuxt-link to="/addresses" class="nav-link">GIVE US YOUR ADDRESS</nuxt-link>
       </b-navbar-nav>
     </b-navbar>
   </div>
@@ -24,7 +25,7 @@ export default {
     }
   },
   created() {
-    const wD = new Date('2023-06-24')
+    const wD = new Date('2026-04-18')
     const d = new Date()
     const dayDiff = Math.abs(wD - d)
 

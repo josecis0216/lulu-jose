@@ -4,6 +4,9 @@
             <b-container>
                 <b-row>
                     <b-col>
+                        <h5>
+                            <nuxt-link to="/addresses">GIVE US YOUR ADDRESS</nuxt-link>
+                        </h5>
                         <h5 style="color:white;">
                             <nuxt-link to="/rsvp">RSVP</nuxt-link>
                         </h5>
@@ -27,7 +30,7 @@
                 <b-row>
                     <b-col>
                         <div style="display:flex;justify-content:center;">
-                            <p>Copyright© DEVCIS 2022</p>
+                            <p>Copyright© DEVCIS {{ currYear }}</p>
                         </div>
                     </b-col>
                 </b-row>
@@ -35,6 +38,19 @@
         </div>
     </section>
 </template>
+
+<script>
+export default {
+  data() {
+    return {
+      currYear: '',
+    }
+  }, 
+  created() {
+    this.currYear = new Date().getFullYear();
+  }
+}
+</script>
 
 <style scoped>
 a {

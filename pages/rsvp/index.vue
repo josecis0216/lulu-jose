@@ -5,13 +5,14 @@
       <b-container>
         <b-row>
           <b-col>
-            <b-card style="max-width: 40rem; margin: 200px auto 0px auto">
+            <b-card style="max-width: 40rem; margin: 200px auto 0px auto;">
               <b-form v-if="show" @submit.prevent="onSubmit" @reset="onReset">
                 <b-form-group id="input-group-1" label="Your Name:" label-for="input-1">
                   <b-form-input id="input-1" v-model="form.fullName" placeholder="Enter name" required></b-form-input>
                 </b-form-group>
 
-                <b-button pill variant="outline-success" @click="showAddGuests" v-show="!showGuests">Add Guest</b-button>
+                <b-button pill variant="outline-success" @click="showAddGuests" v-show="!showGuests">Add
+                  Guest</b-button>
 
                 <b-form-group v-for="(guest, k) in form.guests" :key="k" v-show="showGuests">
                   <b-form-input type="text" class="form-control" placeholder="Guest Name"
@@ -33,11 +34,10 @@
                   </b-form-checkbox-group>
                 </b-form-group>
 
-                <b-card-text></b-card-text>
-                <b-form-checkbox id="checkbox-accept" v-model="form.checkedUnderstand" name="checkbox-accept"
+                <!-- <b-form-checkbox id="checkbox-accept" v-model="form.checkedUnderstand" name="checkbox-accept"
                   value="accepted" unchecked-value="not_accepted">
                   I understand that no children are allowed, as this is an adult only event.
-                </b-form-checkbox>
+                </b-form-checkbox> -->
 
                 <b-button type="submit" variant="primary">Submit</b-button>
                 <b-button type="reset" variant="danger">Reset</b-button>
@@ -67,15 +67,22 @@ export default {
     TopHeader,
     BottomFooter
   },
+  mounted() {
+    const id = this.$route.query.id;
+    const name = this.$route.query.name;
+    this.fullName = name; 
+    console.log(id);
+  },
   data() {
     return {
       form: {
-        fullName: '',
+        // fullName: '',
+        fullName: this.$route.query.name,
         brideOrGroom: [],
         guests: [{
           name: ''
         }],
-        checkedUnderstand: 'not_accepted',
+        // checkedUnderstand: 'not_accepted',
       },
       show: true,
       showGuests: false
@@ -99,15 +106,15 @@ export default {
     },
 
     onSubmit(event) {
-      if (this.form.checkedUnderstand === 'accepted') {
+      // if (this.form.checkedUnderstand === 'accepted') {
         console.log('SUCCESS! Form was submitted')
         this.$store.dispatch('rsvp', this.form).then(() => {
           alert('Thank you for responding, can\'t wait to celebrate with you!')
           this.$router.push('/')
         })
-      } else {
-        alert(JSON.stringify('Must agree that no children are allowed at reception as this is an adult only event. Thank you.'))
-      }
+      // } else {
+       // alert(JSON.stringify('Must agree that no children are allowed at reception as this is an adult only event. Thank you.'))
+      // }
     },
     onReset(event) {
       event.preventDefault()
@@ -128,7 +135,8 @@ export default {
 <style scoped>
 .sectionBody {
   /* background-image: url('https://images.pexels.com/photos/313707/pexels-photo-313707.jpeg?auto=compress&cs=tinysrgb&w=960&h=450&dpr=2'); */
-  background-image: url('~/static/wedding-photo-rsvp.jpeg');
+  background-image: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)), url('~/static/wedding-photo-rsvp.jpeg');
+  /* background-image: url('~/static/wedding-photo-rsvp.jpeg');*/
   background-size: cover;
   background-repeat: no-repeat;
   min-height: 860px;
