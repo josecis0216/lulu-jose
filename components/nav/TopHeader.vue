@@ -1,7 +1,7 @@
 <template>
   <div>
     <div>
-      <h1 class="over-text fade-in">Lupita & Jose</h1>
+      <h1 class="over-text fade-in cursive-text">Lupita & Jose</h1>
       <p class="home-details">April 18, 2026 <br />SALT LAKE CITY, UT</p>
       <P class="home-details">{{ daysToGo }} DAYS TO GO</P>
     </div>
@@ -57,7 +57,7 @@ a.nav-link {
 .over-text {
   text-align: center;
   font-size: 100px;
-  font-family: 'Allura, Helvetica, sans-serif';
+  font-family: 'SimpleSerenity, Helvetica, sans-serif';
   letter-spacing: 15px;
 }
 
@@ -73,6 +73,10 @@ a.nav-link {
   animation-iteration-count: 1;
   animation-timing-function: ease-in;
   animation-duration: 2s;
+}
+
+.cursive-text {
+  font-family: 'SimpleSerenity, Helvetica, sans-serif';
 }
 
 @media only screen and (max-width: 500px) {

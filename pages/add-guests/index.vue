@@ -93,7 +93,7 @@ export default {
     data() {
         return {
             form: {
-                // user_id: this.$store.getters.guestCount + 1,
+                user_id: this.$store.state.guestCount + 1,
                 name: '',
                 brideOrGroom: [], 
                 additionalGuests: [{
@@ -104,11 +104,6 @@ export default {
             showGuests: false,
             isLoading: false
         }
-    },
-    computed: {
-        // guestCount() {
-        //     return this.$store.getters.guestCount
-        // },
     },
     created() {
         this.loadGuestCount()
@@ -122,7 +117,6 @@ export default {
                 this.error = new Error(error.message || 'Failed to load guest count')
             }
             this.isLoading = false
-            console.log(this.$store.getters.guestCount);
         },
         showAddGuests() {
             this.showGuests = true

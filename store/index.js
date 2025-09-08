@@ -4,6 +4,7 @@ export default {
             requests: [],
             addresses: [],
             guests: [],
+            guestCount: 0,
         };
     },
     mutations: {
@@ -24,6 +25,9 @@ export default {
         },
         setGuests(state, payload) {
             state.guests = payload;
+        },
+        setGuestCount(state, payload) {
+            state.guestCount = payload;
         }
     },
     actions: {
@@ -120,6 +124,7 @@ export default {
                 // console.log(requestData);
             }
             context.commit('setGuests', guests);
+            context.commit('setGuestCount', guests.length);
         },
         async saveAddress(context, payload) {
             const requestData = {
@@ -165,8 +170,5 @@ export default {
         hasAddresses(_, getters) {
             return getters.addresses && getters.addresses.length > 0;
         },
-        guestCount(_, getters) {
-            return getters.guests.length;
-        }
     },
 };
