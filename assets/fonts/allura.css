@@ -27,8 +27,9 @@
 
 
 @font-face {
-    font-family: 'SimpleSerenity';
+    font-family: 'Simple-Serenity';
     font-style: normal;
     font-weight: normal;
-    src: url('../fonts/Simple-Serenity-Script.ttf') format('truetype');
+    src: url(../fonts/Simple-Serenity-Script.ttf) format('truetype');
+    /* src: url('../fonts/Simple-Serenity-Script.ttf') format('truetype'); */
 }

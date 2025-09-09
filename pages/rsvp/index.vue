@@ -77,9 +77,10 @@ export default {
     return {
       form: {
         // fullName: '',
+        id: this.$route.query.id, 
         fullName: this.$route.query.name,
         brideOrGroom: [],
-        guests: [{
+        additional_guests: [{
           name: ''
         }],
         // checkedUnderstand: 'not_accepted',
@@ -107,11 +108,11 @@ export default {
 
     onSubmit(event) {
       // if (this.form.checkedUnderstand === 'accepted') {
-        console.log('SUCCESS! Form was submitted')
         this.$store.dispatch('rsvp', this.form).then(() => {
           alert('Thank you for responding, can\'t wait to celebrate with you!')
           this.$router.push('/')
         })
+        console.log('SUCCESS! Form was submitted')
       // } else {
        // alert(JSON.stringify('Must agree that no children are allowed at reception as this is an adult only event. Thank you.'))
       // }
