@@ -33,3 +33,24 @@
     src: url(../fonts/Simple-Serenity-Script.ttf) format('truetype');
     /* src: url('../fonts/Simple-Serenity-Script.ttf') format('truetype'); */
 }
+
+@font-face {
+    font-family: 'Calgary';
+    font-style: normal;
+    font-weight: normal;
+    src: url(../fonts/calgary.ttf) format('truetype');
+}
+
+@font-face {
+    font-family: 'GoldenDream';
+    font-style: normal;
+    font-weight: normal;
+    src: url(../fonts/GoldenDream.otf) format('truetype');
+}
+
+@font-face {
+    font-family: 'RoleModel';
+    font-style: normal;
+    font-weight: normal;
+    src: url(../fonts/RoleModel.otf) format('truetype');
+}

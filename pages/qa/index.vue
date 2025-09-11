@@ -5,7 +5,11 @@
         <b-container>
             <b-row>
                 <b-col>
-                    <h1 style="text-align:center;">Q + A</h1>
+                    <h1 class="header-text">Q + A</h1>
+                </b-col>
+            </b-row>
+            <b-row>
+                <b-col>                    
                     <p>
                         <span class="q-text">Q: Where can we find your gift registry?</span><br>
                         A: We appreciate any gift or even just having you celebrate with us; however, we are looking mostly
@@ -45,6 +49,11 @@ export default {
 </script>
 
 <style scoped>
+.header-text {
+    font-family: 'GoldenDream';
+    font-size: 105px;
+    text-align: center;
+}
 .q-text {
     color: red;
 }
