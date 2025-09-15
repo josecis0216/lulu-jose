@@ -78,17 +78,19 @@ a.nav-link {
 }
 
 .regular-text {
-  font-family: 'Allura, Helvetica, sans-serif';
+  /* font-family: 'Allura, Helvetica, sans-serif'; */
+  font-family: 'RoleModel';
 }
 
-@media only screen and (max-width: 500px) {
+@media only screen and (max-width: 768px) {
   a.nav-link {
     margin: 0px;
-    font-size: 20px;
+    font-size: 11px;
   }
 
   .over-text {
     letter-spacing: 0px;
+    font-size: 70px;
   }
 }
 </style>

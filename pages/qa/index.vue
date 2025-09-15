@@ -9,14 +9,14 @@
                 </b-col>
             </b-row>
             <b-row style="max-width:800px;margin:auto;" no-gutters class="mb-3">
-                <b-col cols="9">
+                <b-col sm="8" lg="9">
                     <p class="q-text">Q: Where can we find your gift registry?</p>
                     <p>
                         A: We appreciate any gift or even just having you celebrate with us; however, we are looking mostly
                         for a honeymoon fund. You can Venmo us here:
                     </p>
                 </b-col>
-                <b-col cols="3">
+                <b-col sm="4" lg="3">
                     <a href="https://account.venmo.com/u/Clarissa-Avila-2"><img
                         style="display:inline;align-items:center; width:150px;height:150px;"
                         src="~/static/venmo-icon.png" alt="venmo link for clarissa honeymoon fund" /></a>

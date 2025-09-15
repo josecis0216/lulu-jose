@@ -5,16 +5,29 @@
       <b-container>
         <b-row>
           <b-col>
-            <b-card style="max-width: 40rem; margin: 200px auto 0px auto;">
+            <b-card style="max-width: 25rem; margin: 200px auto 0px auto;">
               <b-form v-if="show" @submit.prevent="onSubmit" @reset="onReset">
                 <b-form-group id="input-group-1" label="Your Name:" label-for="input-1">
                   <b-form-input id="input-1" v-model="form.fullName" placeholder="Enter name" required></b-form-input>
                 </b-form-group>
 
-                <b-button pill variant="outline-success" @click="showAddGuests" v-show="!showGuests">Add
-                  Guest</b-button>
+                <!-- <b-button pill variant="outline-success" @click="showAddGuests" v-show="!showGuests">Add
+                  Guest</b-button> -->
 
-                <b-form-group v-for="(guest, k) in form.guests" :key="k" v-show="showGuests">
+                  <b-form-group v-for="(guest, k) in form.additional_guests" :key="k" v-show="hasGuests" label="Guest in your party:" class="additional-guest-container">
+                    <b-form-input type="text" class="form-control" placeholder="Guest Name"
+                      v-model="guest.name"></b-form-input>
+                    <span>
+                      <b-button pill variant="outline-danger" @click="remove(k)"
+                        v-show="k || (!k && form.additional_guests.length > 1)">Remove</b-button>                      
+                    </span>
+                  </b-form-group>
+                  <b-form-group>
+                    <b-button  pill variant="outline-success" @click="add(k)" v-show="addGuest">Add
+                        Guest</b-button>
+                  </b-form-group>
+
+                <!-- <b-form-group v-for="(guest, k) in form.guests" :key="k" v-show="showGuests && this.$store.getters.hasGuests">
                   <b-form-input type="text" class="form-control" placeholder="Guest Name"
                     v-model="guest.name"></b-form-input>
                   <span>
@@ -23,7 +36,7 @@
                     <b-button pill variant="outline-success" @click="add(k)" v-show="k == form.guests.length - 1">Add
                       Guest</b-button>
                   </span>
-                </b-form-group>
+                </b-form-group> -->
 
 
                 <b-form-group id="input-group-check" v-slot="{ ariaDescribedby }">
@@ -33,11 +46,6 @@
                     <b-form-checkbox value="groom">I know the groom</b-form-checkbox>
                   </b-form-checkbox-group>
                 </b-form-group>
-
-                <!-- <b-form-checkbox id="checkbox-accept" v-model="form.checkedUnderstand" name="checkbox-accept"
-                  value="accepted" unchecked-value="not_accepted">
-                  I understand that no children are allowed, as this is an adult only event.
-                </b-form-checkbox> -->
 
                 <b-button type="submit" variant="primary">Submit</b-button>
                 <b-button type="reset" variant="danger">Reset</b-button>
@@ -71,25 +79,58 @@ export default {
     const id = this.$route.query.id;
     const name = this.$route.query.name;
     this.fullName = name; 
-    console.log(id);
+    this.id = id;
   },
   data() {
     return {
       form: {
-        // fullName: '',
-        id: this.$route.query.id, 
-        fullName: this.$route.query.name,
+        user_id: null, 
+        fullName: '',
         brideOrGroom: [],
         additional_guests: [{
           name: ''
         }],
-        // checkedUnderstand: 'not_accepted',
       },
       show: true,
-      showGuests: false
+      showGuests: false,
+      addGuest: false,
+    }    
+  },
+  computed: {
+    loadedGuests() {
+      return this.$store.getters.guests
+    },
+    hasGuests() {
+      return this.$store.getters.hasGuests
     }
   },
+  created() {
+    this.loadGuests()
+  },
   methods: {
+    async loadGuests() {
+      this.isLoading = true;
+      try {
+        await this.$store.dispatch('loadGuests');
+      } catch (error) {
+        this.error = new Error(error.message || 'Failed to get guests');
+      }
+      this.getGuest();
+      this.isLoading = false;
+    },
+
+    getGuest() {
+      this.form.user_id = parseInt(this.$route.query.id);
+      this.addGuest = this.$route.query.addGuest;
+
+      this.loadedGuests.forEach(guest => {
+        if (this.form.user_id === guest.user_id) {
+          this.form.fullName = guest.name;
+          this.form.additional_guests = [...guest.additionalGuests];
+        }
+      });      
+    },
+
     showAddGuests() {
       this.showGuests = true
     },
@@ -143,10 +184,15 @@ export default {
   min-height: 860px;
 }
 
-@media only screen and (max-width: 500px) {
+.additional-guest-container {
+  padding-left: 25px;
+}
+
+@media only screen and (max-width: 768px) {
   .sectionBody {
-    background-position-y: 1rem;
-    background-position-x: -30rem;
+    /* background-position-y: 1rem;
+    background-position-x: -30rem; */
+    width: 100%;
   }
 }
 </style>

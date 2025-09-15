@@ -13,7 +13,7 @@
         </b-col>
       </b-row>
       <b-row>
-        <b-col class="text-center">
+        <b-col sm="12" lg="6" class="text-center">
           <!-- image 1 -->
            <img src="~/static/church.jpg" class="overview-img" alt="our lady of lourdes catholic church" />
            <h2 class="details-text mt-2">Ceremony</h2>
@@ -23,7 +23,7 @@
            <p class="date-time">DATE & TIME</p>
            <p class="date-time">APRIL 18, 2026 @ 12pm</p>
         </b-col>
-        <b-col class="text-center">
+        <b-col sm="12" lg="6" class="text-center">
           <!-- image 2 -->
           <img src="~/static/gardenplace.jpg" class="overview-img" alt="this is the place garden place venue" />
            <h2 class="details-text mt-2">Reception</h2>
@@ -161,9 +161,9 @@ img.backgroundImg {
   text-align: center;
 }
 
-@media only screen and (max-width:500px) {
-  img.header-sunflower-img {
-    width: 100%;
+@media only screen and (max-width:768px) {
+  .over-text {
+    font-size: 60px;
   }
 
   .venmo-img {

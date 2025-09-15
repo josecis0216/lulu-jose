@@ -112,7 +112,7 @@ export default {
                 throw error;
             }
 
-            const guests = [];
+            const loadedGuests = [];
             for (const key in responseData) {
                 const requestData = {
                     id: key,
@@ -120,37 +120,11 @@ export default {
                     name: responseData[key].name,
                     additionalGuests: responseData[key].additionalGuests
                 };
-                guests.push(requestData);
+                loadedGuests.push(requestData);
                 // console.log(requestData);
             }
-            context.commit('setGuests', guests);
-            context.commit('setGuestCount', guests.length);
-        },
-        async saveAddress(context, payload) {
-            const requestData = {
-                name: payload.name,
-                address: payload.address,
-                address2: payload.address2,
-                city: payload.city,
-                state: payload.state,
-                zip: payload.zip
-            };
-            const response = await fetch(`https://clarissa-carlos-default-rtdb.firebaseio.com/addresses.json`, { // fetch(`https://vue-practice-88f8e-default-rtdb.firebaseio.com/requests/requests.json`
-                method: 'POST',
-                body: JSON.stringify(requestData)
-            })
-
-            const responseData = await response.json();
-
-            if (!response.ok) {
-                const error = new Error(responseData.message || 'failed to send request.');
-                throw error;
-            }
-
-            requestData.id = responseData.name;
-            // requestData.coachId = payload.coachId;
-
-            context.commit('addAddress', requestData);
+            context.commit('setGuests', loadedGuests);
+            context.commit('setGuestCount', loadedGuests.length);
         },
     },
     getters: {
@@ -170,5 +144,11 @@ export default {
         hasAddresses(_, getters) {
             return getters.addresses && getters.addresses.length > 0;
         },
+        guests(state) {
+            return state.guests;
+        },
+        hasGuests(_, getters) {
+            return getters.guests && getters.guests.length > 0;
+        }
     },
 };
