@@ -5,29 +5,21 @@
         <b-container>
             <b-row>
                 <b-col>
-                    <h1 class="header-text">Q + A</h1>
+                    <h1 class="header-text">Q <span style="font-size:50px;">and</span> A</h1>
                 </b-col>
             </b-row>
-            <b-row>
-                <b-col>                    
+            <b-row style="max-width:800px;margin:auto;" no-gutters class="mb-3">
+                <b-col cols="9">
+                    <p class="q-text">Q: Where can we find your gift registry?</p>
                     <p>
-                        <span class="q-text">Q: Where can we find your gift registry?</span><br>
                         A: We appreciate any gift or even just having you celebrate with us; however, we are looking mostly
                         for a honeymoon fund. You can Venmo us here:
-                        <a href="https://account.venmo.com/u/Clarissa-Avila-2"><img
-                                style="display:inline;align-items:center; width:150px;height:150px;"
-                                src="~/static/venmo-icon.png" alt="venmo link for clarissa honeymoon fund" /></a>
                     </p>
-                    <p>
-                        <span class="q-text">Q: Where to park for reception ceremony?</span><br>
-                        A: Please park at Rosewood Park (1400 N 1200 W, Salt Lake City, UT). The park is located right
-                        behind the location of the reception.
-                    </p>
-                    <p>
-                        <span class="q-text">Q: Why aren't children allowed?</span><br>
-                        A: Unfortunately, we can only accomodate a certain number of guests. So, we hope you understand and
-                        still come celebrate with us!
-                    </p>
+                </b-col>
+                <b-col cols="3">
+                    <a href="https://account.venmo.com/u/Clarissa-Avila-2"><img
+                        style="display:inline;align-items:center; width:150px;height:150px;"
+                        src="~/static/venmo-icon.png" alt="venmo link for clarissa honeymoon fund" /></a>
                 </b-col>
             </b-row>
         </b-container>

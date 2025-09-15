@@ -20,7 +20,7 @@
            <h4 class="venue-title">OUR LADY OF LOURDES CATHOLIC CHURCH</h4>
            <p class="address-details">ADDRESS:</p>
            <p class="address-details"><a class="address-link" href="https://maps.app.goo.gl/mJ5KSp87Ktn3jqWYA" target="_blank">670 1100 E, SALT LAKE CITY, UT 84102</a></p>
-           <p class="date-time">DATE &amp; TIME</p>
+           <p class="date-time">DATE & TIME</p>
            <p class="date-time">APRIL 18, 2026 @ 12pm</p>
         </b-col>
         <b-col class="text-center">
@@ -30,7 +30,7 @@
            <h4 class="venue-title">THE GARDEN PLACE AT HERITAGE PARK</h4>
            <p class="address-details">ADDRESS:</p>
            <p class="address-details"><a class="address-link" href="https://maps.app.goo.gl/bYtEGDAnQoSJS6Ru7" target="_blank">2601 EAST SUNNYSIDE AVE SALT LAKE CITY, UT 84108</a></p>
-           <p class="date-time">DATE &amp; TIME</p>
+           <p class="date-time">DATE & TIME</p>
            <p class="date-time">APRIL 18, 2026 @ 3pm</p>
         </b-col>
       </b-row>
