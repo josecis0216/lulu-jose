@@ -36,7 +36,21 @@
       </b-row>
       <b-row>
         <b-col>
-          <img v-show="loaded" src="~/static/lupita-jose.jpeg" class="icon backgroundImg" @load="onLoaded" />
+          <h2 class="cursive-text wedding-overview-title">Additional Reception Venue Information</h2>
+        </b-col>
+      </b-row>
+      <b-row>
+        <b-col>
+          <img src="~/static/garden-place-map-image.png" class="venue-img" alt="this is the place garden place venue map image" />
+        </b-col>
+      </b-row>
+      <!-- <b-row>
+        <b-col cols="2">
+          <img src="~/static/garden-place-event-map.png" class="venue-img" alt="this is the place garden place venue map qr code" />
+        </b-col>
+      </b-row> -->
+      <b-row>
+        <b-col>
           <h2 class="cursive-text">Contribute To Our Honeymoon Fund</h2>
           <a href="https://account.venmo.com/u/Clarissa-Avila-2">
             <img src="~/static/clarissa-venmo.jpg" class="venmo-img" alt="clarissa venmo screenshot" />
@@ -101,6 +115,10 @@ export default {
   border-radius: 200px 200px 0 0;
   width: 50%;
   height: 300px;
+}
+
+.venue-img {
+  width: 100%;
 }
 
 .venue-title {
