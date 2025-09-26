@@ -33,9 +33,12 @@
                                                                     v-model="guest.name"></b-form-input>
                                                             </b-col>
                                                             <b-col>
+                                                                <b-form-checkbox v-model="guest.child">Child</b-form-checkbox>
+                                                            </b-col>
+                                                            <b-col>
                                                                 <span>
                                                                     <b-button pill variant="outline-danger" @click="remove(k)"
-                                                                    v-show="k || (!k && form.additionalGuests.length > 1)">Remove</b-button>                                                                    
+                                                                    v-show="k || (!k && form.additionalGuests.length > 0)">Remove</b-button>                                                                    
                                                                 </span>
                                                             </b-col>
                                                         </b-row>
@@ -57,6 +60,11 @@
                                                             <b-form-checkbox value="bride">Knows bride</b-form-checkbox>
                                                             <b-form-checkbox value="groom">Knows groom</b-form-checkbox>
                                                         </b-form-checkbox-group>
+                                                    </b-form-group>
+                                                </b-col>
+                                                <b-col>
+                                                    <b-form-group>
+                                                        <b-form-checkbox v-model="form.hasChildren">Has Children</b-form-checkbox>
                                                     </b-form-group>
                                                 </b-col>
                                             </b-row>
@@ -93,16 +101,19 @@ export default {
     data() {
         return {
             form: {
-                user_id: this.$store.state.guestCount + 1,
+                user_id: 0,
                 name: '',
                 brideOrGroom: [], 
                 additionalGuests: [{
-                    name: ''
+                    name: '', 
+                    child: false,
+                    needsOwnChair: true
                 }],
+                hasChildren: false
             },
             show: true, 
             showGuests: false,
-            isLoading: false
+            isLoading: false, 
         }
     },
     created() {
@@ -112,7 +123,8 @@ export default {
         async loadGuestCount() {
             this.isLoading = true
             try {
-                await this.$store.dispatch('loadGuests')
+                await this.$store.dispatch('loadGuests');
+                this.form.user_id = this.$store.state.guestCount + 1;
             } catch (error) {
                 this.error = new Error(error.message || 'Failed to load guest count')
             }
@@ -140,6 +152,7 @@ export default {
                 this.clearForm();
             })
             console.log('SUCCESS! Guest was added');
+            this.loadGuestCount();
         },
         onReset(event) {
             event.preventDefault()
@@ -147,8 +160,10 @@ export default {
             this.form.name = ''
             this.form.brideOrGroom = []
             this.form.additionalGuests = [{
-                name: ''
+                name: '',
+                child: false
             }]
+            this.form.hasChildren = false
             // Trick to reset/clear native browser form validation state
             this.show = false
             this.$nextTick(() => {
@@ -164,6 +179,7 @@ export default {
                 this.show = true
             })
             this.showGuests = false
+            this.form.hasChildren = false
         }
     }
 }

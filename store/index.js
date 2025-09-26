@@ -83,7 +83,9 @@ export default {
             const requestData = {
                 user_id: payload.user_id,
                 name: payload.name,
+                brideOrGroom: payload.brideOrGroom,
                 additionalGuests: payload.additionalGuests,
+                hasChildren: payload.hasChildren
                 //   message: payload.message,
             };
             const response = await fetch(`https://clarissa-carlos-default-rtdb.firebaseio.com/guests.json`, {
@@ -118,7 +120,9 @@ export default {
                     id: key,
                     user_id: responseData[key].user_id,
                     name: responseData[key].name,
-                    additionalGuests: responseData[key].additionalGuests
+                    brideOrGroom: responseData[key].brideOrGroom,
+                    additionalGuests: responseData[key].additionalGuests,
+                    hasChildren: responseData[key].hasChildren
                 };
                 loadedGuests.push(requestData);
                 // console.log(requestData);
