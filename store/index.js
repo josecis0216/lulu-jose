@@ -35,7 +35,7 @@ export default {
             const requestData = {
                 fullName: payload.fullName,
                 brideOrGroom: payload.brideOrGroom,
-                guests: payload.guests
+                guests: payload.additional_guests
                 //   message: payload.message,
             };
             // const response = await fetch(`https://clarissa-carlos-default-rtdb.firebaseio.com/newRequests.json`, { // fetch(`https://vue-practice-88f8e-default-rtdb.firebaseio.com/requests/requests.json`

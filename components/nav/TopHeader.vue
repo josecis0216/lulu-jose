@@ -8,7 +8,7 @@
           <nuxt-link to="/rsvp" class="nav-link">RSVP</nuxt-link>
           <nuxt-link to="/story" class="nav-link">OUR STORY</nuxt-link>
           <nuxt-link to="/qa" class="nav-link">Q + A</nuxt-link>
-          <nuxt-link to="/addresses" class="nav-link">GIVE US YOUR ADDRESS</nuxt-link>
+          <!-- <nuxt-link to="/addresses" class="nav-link">GIVE US YOUR ADDRESS</nuxt-link> -->
         </b-navbar-nav>
       </b-navbar>
       <!-- <p class="home-details regular-text">April 18, 2026 <br />SALT LAKE CITY, UT</p> -->
@@ -56,7 +56,7 @@ a.nav-link {
 
 .over-text {
   text-align: center;
-  font-size: 125px;
+  font-size: 135px;
   letter-spacing: 15px;
 }
 
@@ -90,7 +90,7 @@ a.nav-link {
 
   .over-text {
     letter-spacing: 0px;
-    font-size: 70px;
+    font-size: 80px;
   }
 }
 </style>

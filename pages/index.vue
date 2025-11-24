@@ -36,12 +36,12 @@
       </b-row>
       <b-row>
         <b-col>
-          <h2 class="cursive-text wedding-overview-title">Additional Reception Venue Information</h2>
+          <h2 class="cursive-sub-text wedding-overview-title">Additional Reception Venue Information</h2>
         </b-col>
       </b-row>
       <b-row>
         <b-col>
-          <img src="~/static/garden-place-map-image.png" class="venue-img" alt="this is the place garden place venue map image" />
+          <img src="~/static/garden-place-map-image.png" class="venue-img" alt="this is the place garden place venue map image" style="border: 1px solid black;" />
         </b-col>
       </b-row>
       <!-- <b-row>
@@ -49,11 +49,11 @@
           <img src="~/static/garden-place-event-map.png" class="venue-img" alt="this is the place garden place venue map qr code" />
         </b-col>
       </b-row> -->
-      <b-row>
-        <b-col>
-          <h2 class="cursive-text">Contribute To Our Honeymoon Fund</h2>
-          <a href="https://account.venmo.com/u/Clarissa-Avila-2">
-            <img src="~/static/clarissa-venmo.jpg" class="venmo-img" alt="clarissa venmo screenshot" />
+      <b-row class="justify-content-center">
+        <b-col cols="12" lg="6">
+          <h2 class="cursive-sub-text">Contribute To Our Honeymoon Fund</h2>
+          <a href="https://account.venmo.com/u/lupitaa3">
+            <img src="~/static/lulu-venmo.png" class="venmo-img" alt="clarissa venmo screenshot" style="width: 100%;"/>
           </a>
         </b-col>
       </b-row>
@@ -96,10 +96,17 @@ export default {
 </script>
 
 <style scoped>
-.cursive-text {
+.cursive-text, .cursive-sub-text {
   text-align: center;
-  font-family: 'GoldenDream';
+  font-family: 'GoldenDream';  
+}
+
+.cursive-text {
   font-size: 90px;
+}
+
+.cursive-sub-text {
+  font-size: 72px;
 }
 
 .header-img {
@@ -180,6 +187,15 @@ img.backgroundImg {
 }
 
 @media only screen and (max-width:768px) {
+  .cursive-text {
+    letter-spacing: 4px;
+  }
+
+  .cursive-sub-text {
+    font-size: 60px;
+    letter-spacing: 5px;
+  }
+
   .over-text {
     font-size: 60px;
   }

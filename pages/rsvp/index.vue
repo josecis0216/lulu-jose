@@ -5,7 +5,7 @@
       <b-container>
         <b-row>
           <b-col>
-            <b-card style="max-width: 25rem; margin: 200px auto 0px auto;">
+            <b-card class="card-container">
               <b-form v-if="show" @submit.prevent="onSubmit" @reset="onReset">
                 <b-form-group id="input-group-1" label="Your Name:" label-for="input-1">
                   <b-form-input id="input-1" v-model="form.fullName" placeholder="Enter name" required></b-form-input>
@@ -20,7 +20,7 @@
                     <span>
                       <b-button pill variant="outline-danger" @click="remove(k)"
                         v-show="k || (!k && form.additional_guests.length > 1)">Remove</b-button>                      
-                    </span>
+                    </span>                    
                   </b-form-group>
                   <b-form-group>
                     <b-button  pill variant="outline-success" @click="add(k)" v-show="addGuest">Add
@@ -121,7 +121,8 @@ export default {
 
     getGuest() {
       this.form.user_id = parseInt(this.$route.query.id);
-      this.addGuest = this.$route.query.addGuest;
+      //  this.addGuest = this.$route.query.addGuest;
+      this.addGuest = !this.$route.query.id && this.$route.query.id !== '';
 
       this.loadedGuests.forEach(guest => {
         if (this.form.user_id === guest.user_id) {
@@ -136,15 +137,15 @@ export default {
     },
 
     add() {
-      this.form.guests.push({
+      this.form.additional_guests.push({
         name: ''
       })
-      console.log(this.form.guests)
+      console.log(this.form.additional_guests)
     },
 
     remove(index) {
-      this.form.guests.splice(index, 1)
-      console.log(this.form.guests)
+      this.form.additional_guests.splice(index, 1)
+      console.log(this.form.additional_guests)
     },
 
     onSubmit(event) {
@@ -175,13 +176,12 @@ export default {
 </script>
 
 <style scoped>
+.card-container {
+  max-width: 25rem; 
+}
+
 .sectionBody {
-  /* background-image: url('https://images.pexels.com/photos/313707/pexels-photo-313707.jpeg?auto=compress&cs=tinysrgb&w=960&h=450&dpr=2'); */
-  background-image: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)), url('~/static/wedding-photo-rsvp.jpeg');
-  /* background-image: url('~/static/wedding-photo-rsvp.jpeg');*/
-  background-size: cover;
-  background-repeat: no-repeat;
-  min-height: 860px;
+  background-repeat: no-repeat;  
 }
 
 .additional-guest-container {
@@ -189,10 +189,28 @@ export default {
 }
 
 @media only screen and (max-width: 768px) {
+  .card-container {
+    margin: 175px auto 0px auto;
+  }
+
   .sectionBody {
     /* background-position-y: 1rem;
     background-position-x: -30rem; */
-    width: 100%;
+    background-image: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)), url('~/static/wedding-photo-rsvp1.jpeg');
+    background-size: contain;
+    min-height: 560px;
+  }
+}
+
+@media only screen and (min-width: 769px) {
+  .sectionBody {
+    background-image: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)), url('~/static/wedding-photo-rsvp.jpeg');
+    background-size: cover;
+    min-height: 860px;
+  }
+
+  .card-container {
+    margin: 275px auto 0px auto;
   }
 }
 </style>
