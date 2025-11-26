@@ -50,8 +50,12 @@
         </b-col>
       </b-row> -->
       <b-row class="justify-content-center">
-        <b-col cols="12" lg="6">
+        <b-col cols="12">
           <h2 class="cursive-sub-text">Contribute To Our Honeymoon Fund</h2>
+        </b-col>
+      </b-row>
+      <b-row class="justify-content-center">
+        <b-col cols="12" lg="6">
           <a href="https://account.venmo.com/u/lupitaa3">
             <img src="~/static/lulu-venmo.png" class="venmo-img" alt="clarissa venmo screenshot" style="width: 100%;"/>
           </a>
