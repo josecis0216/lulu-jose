@@ -15,23 +15,25 @@
       <b-row>
         <b-col sm="12" lg="6" class="text-center">
           <!-- image 1 -->
-           <img src="~/static/church.jpg" class="overview-img" alt="our lady of lourdes catholic church" />
-           <h2 class="details-text mt-2">Ceremony</h2>
-           <h4 class="venue-title">OUR LADY OF LOURDES CATHOLIC CHURCH</h4>
-           <p class="address-details">ADDRESS:</p>
-           <p class="address-details"><a class="address-link" href="https://maps.app.goo.gl/mJ5KSp87Ktn3jqWYA" target="_blank">670 1100 E, SALT LAKE CITY, UT 84102</a></p>
-           <p class="date-time">DATE & TIME</p>
-           <p class="date-time">APRIL 18, 2026 @ 12pm</p>
+          <img src="~/static/church.jpg" class="overview-img" alt="our lady of lourdes catholic church" />
+          <h2 class="details-text mt-2">Ceremony</h2>
+          <h4 class="venue-title">OUR LADY OF LOURDES CATHOLIC CHURCH</h4>
+          <p class="address-details">ADDRESS:</p>
+          <p class="address-details"><a class="address-link" href="https://maps.app.goo.gl/mJ5KSp87Ktn3jqWYA"
+              target="_blank">670 1100 E, SALT LAKE CITY, UT 84102</a></p>
+          <p class="date-time">DATE & TIME</p>
+          <p class="date-time">APRIL 18, 2026 @ 12pm</p>
         </b-col>
         <b-col sm="12" lg="6" class="text-center">
           <!-- image 2 -->
           <img src="~/static/gardenplace.jpg" class="overview-img" alt="this is the place garden place venue" />
-           <h2 class="details-text mt-2">Reception</h2>
-           <h4 class="venue-title">THE GARDEN PLACE AT HERITAGE PARK</h4>
-           <p class="address-details">ADDRESS:</p>
-           <p class="address-details"><a class="address-link" href="https://maps.app.goo.gl/bYtEGDAnQoSJS6Ru7" target="_blank">2601 EAST SUNNYSIDE AVE SALT LAKE CITY, UT 84108</a></p>
-           <p class="date-time">DATE & TIME</p>
-           <p class="date-time">APRIL 18, 2026 @ 3pm</p>
+          <h2 class="details-text mt-2">Reception</h2>
+          <h4 class="venue-title">THE GARDEN PLACE AT HERITAGE PARK</h4>
+          <p class="address-details">ADDRESS:</p>
+          <p class="address-details"><a class="address-link" href="https://maps.app.goo.gl/bYtEGDAnQoSJS6Ru7"
+              target="_blank">2601 EAST SUNNYSIDE AVE SALT LAKE CITY, UT 84108</a></p>
+          <p class="date-time">DATE & TIME</p>
+          <p class="date-time">APRIL 18, 2026 @ 3pm</p>
         </b-col>
       </b-row>
       <b-row>
@@ -41,7 +43,8 @@
       </b-row>
       <b-row>
         <b-col>
-          <img src="~/static/garden-place-map-image.png" class="venue-img" alt="this is the place garden place venue map image" style="border: 1px solid black;" />
+          <img src="~/static/garden-place-map-image.png" class="venue-img"
+            alt="this is the place garden place venue map image" style="border: 1px solid black;" />
         </b-col>
       </b-row>
       <!-- <b-row>
@@ -56,8 +59,11 @@
       </b-row>
       <b-row class="justify-content-center">
         <b-col cols="12" lg="6">
-          <a href="https://account.venmo.com/u/lupitaa3">
-            <img src="~/static/lulu-venmo.png" class="venmo-img" alt="clarissa venmo screenshot" style="width: 100%;"/>
+          <a id="venmo-link-desktop" href="https://account.venmo.com/u/lupitaa3" target="_blank">
+            <img src="~/static/lulu-venmo.png" class="venmo-img" alt="lulu venmo screenshot" style="width: 100%;" />
+          </a>
+          <a href="venmo://paycharge?txm-pay&recipients=lupitaa3" id="venmo-link-mobile">
+            <img src="~/static/lulu-venmo.png" class="venmo-img" alt="lulu venmo screenshot" style="width: 100%;" />
           </a>
         </b-col>
       </b-row>
@@ -206,6 +212,16 @@ img.backgroundImg {
 
   .venmo-img {
     width: 100%;
+  }
+
+  #venmo-link-desktop {
+    display: none;
+  }
+}
+
+@media only screen and (min-width:769px) {
+  #venmo-link-mobile {
+    display: none;
   }
 }
 

@@ -69,6 +69,7 @@
 <script>
 import TopHeader from '@/components/nav/TopHeader.vue'
 import BottomFooter from '@/components/nav/BottomFooter.vue'
+import { Date } from 'core-js';
 
 export default {
   components: {
@@ -80,6 +81,7 @@ export default {
     const name = this.$route.query.name;
     this.fullName = name; 
     this.id = id;
+    this.rsvp_date = new Date();
   },
   data() {
     return {
@@ -90,6 +92,7 @@ export default {
         additional_guests: [{
           name: ''
         }],
+        rsvp_date: Date,
       },
       show: true,
       showGuests: false,
