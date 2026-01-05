@@ -6,7 +6,7 @@
         <b-row>
           <b-col>
             <b-card class="card-container">
-              <b-form v-if="show" @submit.prevent="onSubmit" @reset="onReset">
+              <b-form v-if="show" @submit.prevent="onSubmit" @reset="onReset" class="rsvp-form">
                 <b-form-group id="input-group-1" label="Your Name:" label-for="input-1">
                   <b-form-input id="input-1" v-model="form.fullName" placeholder="Enter name" required></b-form-input>
                 </b-form-group>
@@ -47,6 +47,10 @@
                   </b-form-checkbox-group>
                 </b-form-group>
 
+                <p v-show="form.hasChildren">Your children are welcome to be at the reception; however, due to limited seating we cannot 
+                  guarantee them their own chair. 
+                </p>
+
                 <b-button type="submit" variant="primary">Submit</b-button>
                 <b-button type="reset" variant="danger">Reset</b-button>
               </b-form>
@@ -67,9 +71,9 @@
 </template>
 
 <script>
+import { Date } from 'core-js';
 import TopHeader from '@/components/nav/TopHeader.vue'
 import BottomFooter from '@/components/nav/BottomFooter.vue'
-import { Date } from 'core-js';
 
 export default {
   components: {
@@ -81,7 +85,6 @@ export default {
     const name = this.$route.query.name;
     this.fullName = name; 
     this.id = id;
-    this.rsvp_date = new Date();
   },
   data() {
     return {
@@ -92,7 +95,8 @@ export default {
         additional_guests: [{
           name: ''
         }],
-        rsvp_date: Date,
+        rsvp_date: new Date(),
+        hasChildren: false,
       },
       show: true,
       showGuests: false,
@@ -131,6 +135,8 @@ export default {
         if (this.form.user_id === guest.user_id) {
           this.form.fullName = guest.name;
           this.form.additional_guests = [...guest.additionalGuests];
+          this.form.rsvp_date = new Date();
+          this.form.hasChildren = guest.hasChildren;
         }
       });      
     },
@@ -152,15 +158,11 @@ export default {
     },
 
     onSubmit(event) {
-      // if (this.form.checkedUnderstand === 'accepted') {
         this.$store.dispatch('rsvp', this.form).then(() => {
           alert('Thank you for responding, can\'t wait to celebrate with you!')
           this.$router.push('/')
         })
         console.log('SUCCESS! Form was submitted')
-      // } else {
-       // alert(JSON.stringify('Must agree that no children are allowed at reception as this is an adult only event. Thank you.'))
-      // }
     },
     onReset(event) {
       event.preventDefault()
@@ -180,26 +182,31 @@ export default {
 
 <style scoped>
 .card-container {
-  max-width: 25rem; 
+  max-width: 25rem;
+  opacity: 0.8;
 }
 
 .sectionBody {
-  background-repeat: no-repeat;  
+  background-image: url('~/static/rsvp-image.jpg');
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 .additional-guest-container {
   padding-left: 25px;
 }
 
+.rsvp-form {
+  font-weight: bold;
+}
+
 @media only screen and (max-width: 768px) {
   .card-container {
-    margin: 175px auto 0px auto;
+    margin: 85px auto 0px auto;
   }
 
   .sectionBody {
-    /* background-position-y: 1rem;
-    background-position-x: -30rem; */
-    background-image: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)), url('~/static/wedding-photo-rsvp1.jpeg');
+    /* background-image: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)), url('~/static/rsvp-image.jpg'); */
     background-size: contain;
     min-height: 560px;
   }
@@ -207,9 +214,10 @@ export default {
 
 @media only screen and (min-width: 769px) {
   .sectionBody {
-    background-image: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)), url('~/static/wedding-photo-rsvp.jpeg');
+    /* background-image: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)), url('~/static/rsvp-image.jpg'); */    
     background-size: cover;
     min-height: 860px;
+    background-color: #cccccc;
   }
 
   .card-container {

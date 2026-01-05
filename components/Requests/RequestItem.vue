@@ -8,6 +8,12 @@
     <p v-for="guest in guests" :key="guest.name">
       {{ guest.name }}
     </p>
+    <p>
+      RSVP Date: 
+    </p>
+    <p>
+      {{ rsvpDate }}
+    </p>
   </li>
 </template>
 
@@ -29,6 +35,10 @@ export default {
       default() {
         return [{ name: '' }]
       }
+    }, 
+    rsvpDate: {
+      type: Date,
+      default: ''
     }
   },
 }

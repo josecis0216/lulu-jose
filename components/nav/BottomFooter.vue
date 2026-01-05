@@ -1,8 +1,8 @@
 <template>
     <section>
-        <div style="background-color:#17a2b8;">
+        <div style="background-color:#808080;">
             <b-container>
-                <b-row style="max-width:600px;margin:auto;">
+                <b-row style="max-width:800px;margin:auto;">
                     <b-col>
                         <!-- <h5>
                             <nuxt-link to="/addresses">GIVE US YOUR ADDRESS</nuxt-link>

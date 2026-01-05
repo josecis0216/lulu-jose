@@ -13,8 +13,9 @@
                 <base-spinner></base-spinner>
             </div>
             <div v-else-if="hasResponses && !isLoading">
-                <request-item v-for="req in receivedResponses" :key="req.id" :full-name="req.fullName"
-                    :bride-or-groom="req.brideOrGroom" :guests="req.guests"></request-item>
+                <request-item 
+                    v-for="req in receivedResponses" :key="req.id" :full-name="req.fullName"
+                    :bride-or-groom="req.brideOrGroom" :guests="req.guests" :rsvp_date="req.rsvpDate"></request-item>
             </div>
             <h3 v-else>You haven't received any responses yet!</h3>
         </base-card>
