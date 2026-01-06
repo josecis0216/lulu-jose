@@ -54,3 +54,10 @@
     font-weight: normal;
     src: url(../fonts/RoleModel.otf) format('truetype');
 }
+
+@font-face {
+    font-family: 'Tenor-Sans';
+    font-style: normal;
+    font-weight: normal;
+    src: url(../fonts/tenor-sans.ttf) format('truetype');
+}

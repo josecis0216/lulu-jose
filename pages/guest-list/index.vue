@@ -1,28 +1,37 @@
 <template>
-    <div>
+    <section>
         <top-header />
 
-        <base-dialogue :show="!!error" title="An error occured!!" @close="handleError">
-            <p>{{ error }}</p>
-        </base-dialogue>
-        <base-card>
-            <header>
-                <h2>Responses Received</h2>
-            </header>
-            <div v-if="isLoading">
-                <base-spinner></base-spinner>
-            </div>
-            <div v-else-if="hasGuests && !isLoading">
-                <guest-item v-for="req in loadedGuests" :key="req.id" :name="req.name" :user-id="req.userId"
-                    :bride-or-groom="req.brideOrGroom" :guests="req.additionalGuests" :has-children="req.hasChildren"></guest-item>
-            </div>
-            <h3 v-else>You haven't received any responses yet!</h3>
-        </base-card>
+        <b-container>
+            <b-row>
+                <b-col>
+                    <h1>Guest List</h1>
+                    <base-dialogue :show="!!error" title="An error occured!!" @close="handleError">
+                        <p>{{ error }}</p>
+                    </base-dialogue>
+                </b-col>
+            </b-row>
+            <b-row>
+                <b-col>
+                    <base-card>
+                        <div v-if="isLoading">
+                            <base-spinner></base-spinner>
+                        </div>
+                        <div v-else-if="hasGuests && !isLoading">
+                            <guest-item v-for="req in loadedGuests" :key="req.id" :name="req.name" :user-id="req.userId"
+                                :bride-or-groom="req.brideOrGroom" :guests="req.additionalGuests"
+                                :has-children="req.hasChildren"></guest-item>
+                        </div>
+                        <h3 v-else>You don't have any guests on your list!</h3>
+                    </base-card>
+                </b-col>
+            </b-row>
+        </b-container>
 
         <bottom-footer />
-    </div>
+    </section>
 </template>
-  
+
 <script>
 import TopHeader from '@/components/nav/TopHeader.vue'
 import BottomFooter from '@/components/nav/BottomFooter.vue'
@@ -76,4 +85,3 @@ export default {
     },
 }
 </script>
-  

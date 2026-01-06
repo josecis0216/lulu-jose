@@ -14,18 +14,19 @@
                 <!-- <b-button pill variant="outline-success" @click="showAddGuests" v-show="!showGuests">Add
                   Guest</b-button> -->
 
-                  <b-form-group v-for="(guest, k) in form.additional_guests" :key="k" v-show="hasGuests" label="Guest in your party:" class="additional-guest-container">
-                    <b-form-input type="text" class="form-control" placeholder="Guest Name"
-                      v-model="guest.name"></b-form-input>
-                    <span>
-                      <b-button pill variant="outline-danger" @click="remove(k)"
-                        v-show="k || (!k && form.additional_guests.length > 1)">Remove</b-button>                      
-                    </span>                    
-                  </b-form-group>
-                  <b-form-group>
-                    <b-button  pill variant="outline-success" @click="add(k)" v-show="addGuest">Add
-                        Guest</b-button>
-                  </b-form-group>
+                <b-form-group v-for="(guest, k) in form.additional_guests" :key="k" v-show="hasGuests"
+                  label="Guest in your party:" class="additional-guest-container">
+                  <b-form-input type="text" class="form-control" placeholder="Guest Name"
+                    v-model="guest.name"></b-form-input>
+                  <span>
+                    <b-button pill variant="outline-danger" @click="remove(k)"
+                      v-show="k || (!k && form.additional_guests.length > 1)">Remove</b-button>
+                  </span>
+                </b-form-group>
+                <b-form-group>
+                  <b-button pill variant="outline-success" @click="add(k)" v-show="addGuest">Add
+                    Guest</b-button>
+                </b-form-group>
 
                 <!-- <b-form-group v-for="(guest, k) in form.guests" :key="k" v-show="showGuests && this.$store.getters.hasGuests">
                   <b-form-input type="text" class="form-control" placeholder="Guest Name"
@@ -47,8 +48,9 @@
                   </b-form-checkbox-group>
                 </b-form-group>
 
-                <p v-show="form.hasChildren">Your children are welcome to be at the reception; however, due to limited seating we cannot 
-                  guarantee them their own chair. 
+                <p v-show="form.hasChildren">Your children are welcome to be at the reception; however, due to limited
+                  seating we cannot
+                  guarantee them their own chair.
                 </p>
 
                 <b-button type="submit" variant="primary">Submit</b-button>
@@ -83,13 +85,13 @@ export default {
   mounted() {
     const id = this.$route.query.id;
     const name = this.$route.query.name;
-    this.fullName = name; 
+    this.fullName = name;
     this.id = id;
   },
   data() {
     return {
       form: {
-        user_id: null, 
+        user_id: null,
         fullName: '',
         brideOrGroom: [],
         additional_guests: [{
@@ -101,7 +103,7 @@ export default {
       show: true,
       showGuests: false,
       addGuest: false,
-    }    
+    }
   },
   computed: {
     loadedGuests() {
@@ -138,7 +140,7 @@ export default {
           this.form.rsvp_date = new Date();
           this.form.hasChildren = guest.hasChildren;
         }
-      });      
+      });
     },
 
     showAddGuests() {
@@ -158,11 +160,11 @@ export default {
     },
 
     onSubmit(event) {
-        this.$store.dispatch('rsvp', this.form).then(() => {
-          alert('Thank you for responding, can\'t wait to celebrate with you!')
-          this.$router.push('/')
-        })
-        console.log('SUCCESS! Form was submitted')
+      this.$store.dispatch('rsvp', this.form).then(() => {
+        alert('Thank you for responding, can\'t wait to celebrate with you!')
+        this.$router.push('/')
+      })
+      console.log('SUCCESS! Form was submitted')
     },
     onReset(event) {
       event.preventDefault()
@@ -207,14 +209,14 @@ export default {
 
   .sectionBody {
     /* background-image: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)), url('~/static/rsvp-image.jpg'); */
-    background-size: contain;
+    background-size: cover;
     min-height: 560px;
   }
 }
 
 @media only screen and (min-width: 769px) {
   .sectionBody {
-    /* background-image: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)), url('~/static/rsvp-image.jpg'); */    
+    /* background-image: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)), url('~/static/rsvp-image.jpg'); */
     background-size: cover;
     min-height: 860px;
     background-color: #cccccc;
@@ -223,5 +225,22 @@ export default {
   .card-container {
     margin: 275px auto 0px auto;
   }
+}
+
+.page-enter-active,
+.page-leave-active {
+  transition: opacity 1s ease;
+}
+
+.page-enter-from,
+.page-enter,
+.page-leave-to {
+  opacity: 0;
+  /* filter: blur(1rem); */
+}
+
+.page-enter-to,
+.page-leave-from {
+  opacity: 1;
 }
 </style>

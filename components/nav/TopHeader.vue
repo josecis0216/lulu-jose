@@ -1,11 +1,12 @@
 <template>
-  <div>
+  <div class="nav-background">
     <div>
-      <h1 class="over-text fade-in cursive-text">Lupita & Jose</h1>
+      <!-- <h1 class="over-text fade-in cursive-text">Lupita & Jose</h1> -->
       <b-navbar>
         <b-navbar-nav class="m-auto">
           <nuxt-link to="/" class="nav-link">HOME</nuxt-link>
           <nuxt-link to="/rsvp" class="nav-link">RSVP</nuxt-link>
+          <nuxt-link to="/about" class="nav-link">DETAILS</nuxt-link>
           <nuxt-link to="/story" class="nav-link">OUR STORY</nuxt-link>
           <nuxt-link to="/qa" class="nav-link">Q + A</nuxt-link>
           <!-- <nuxt-link to="/addresses" class="nav-link">GIVE US YOUR ADDRESS</nuxt-link> -->
@@ -63,6 +64,10 @@ a.nav-link {
 .home-details {
   text-align: center;
   font-size: 35px;
+}
+
+.nav-background {
+  background-color: white;
 }
 
 .fade-in {

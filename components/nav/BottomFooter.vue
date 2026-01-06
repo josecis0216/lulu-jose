@@ -23,10 +23,6 @@
                     <b-col></b-col>
                     <b-col></b-col>
                 </b-row>
-            </b-container>
-        </div>
-        <div>
-            <b-container>
                 <b-row>
                     <b-col>
                         <div style="display:flex;justify-content:center;">
@@ -41,14 +37,14 @@
 
 <script>
 export default {
-  data() {
-    return {
-      currYear: '',
+    data() {
+        return {
+            currYear: '',
+        }
+    },
+    created() {
+        this.currYear = new Date().getFullYear();
     }
-  }, 
-  created() {
-    this.currYear = new Date().getFullYear();
-  }
 }
 </script>
 

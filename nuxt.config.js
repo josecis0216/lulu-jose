@@ -12,6 +12,10 @@ export default {
       { name: 'format-detection', content: 'telephone=no' },
     ],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
+    link: [{ rel: 'preconnect', href: 'https://fonts.googleapis.com' }],
+    link: [{ rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' }],
+    link: [{ href: 'https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,100..900;1,100..900&display=swap', rel: 'stylesheet' }],
+    link: [{ href: 'https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Noto+Serif:ital,wght@0,100..900;1,100..900&display=swap', rel: 'stylesheet' }]
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
@@ -35,8 +39,14 @@ export default {
   modules: [
     // https://go.nuxtjs.dev/bootstrap
     'bootstrap-vue/nuxt',
+    // nuxt/fonts
+    //'@nuxt/fonts',
   ],
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
+
+  app: {
+    PageTransition: { name: '/', mode: 'out-in' },
+  }
 }

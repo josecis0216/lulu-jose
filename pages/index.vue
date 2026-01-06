@@ -1,79 +1,69 @@
 <template>
-  <section>
+  <section style="background-color: #e8e2dd;">
 
-    <!-- <div class="header-img">
-      <img src="~/static/sunflower.png" alt="sunflower header image" class="header-sunflower-img" />
-    </div> -->
-    <TopHeader />
+    <div class="home-page">
+      <b-container>
+        <b-row>
+          <b-col>
+            <h1 class="cursive-text wedding-overview-title">The wedding of</h1>
+            <h2 class="wedding-overview-subtitle">Lupita & Jose</h2>
+          </b-col>
+        </b-row>
+        <b-row>
+          <b-col>
+            <TopHeader />
+          </b-col>
+        </b-row>
+        <b-row align-h="between">
+          <b-col cols="6" lg="4">
+            <p class="wedding-details">April 18, 2026</p>
+          </b-col>
+          <b-col cols="6" lg="4">
+            <p class="wedding-details" style="text-align: right;">SALT LAKE CITY, UTAH</p>
+          </b-col>
+        </b-row>
+        <b-row class="arrow-container">
+          <b-col class="d-flex justify-content-center">
+            <b-icon-arrow-down style="width: 50px; height: 50px;"></b-icon-arrow-down>
+          </b-col>
+        </b-row>
+      </b-container>
+    </div>
 
-    <b-container>
-      <b-row>
-        <b-col>
-          <h1 class="cursive-text wedding-overview-title">Wedding Overview</h1>
-        </b-col>
-      </b-row>
-      <b-row>
-        <b-col sm="12" lg="6" class="text-center">
-          <!-- image 1 -->
-          <img src="~/static/church.jpg" class="overview-img" alt="our lady of lourdes catholic church" />
-          <h2 class="details-text mt-2">Ceremony</h2>
-          <h4 class="venue-title">OUR LADY OF LOURDES CATHOLIC CHURCH</h4>
-          <p class="address-details">ADDRESS:</p>
-          <p class="address-details"><a class="address-link" href="https://maps.app.goo.gl/mJ5KSp87Ktn3jqWYA"
-              target="_blank">670 1100 E, SALT LAKE CITY, UT 84102</a></p>
-          <p class="date-time">DATE & TIME</p>
-          <p class="date-time">APRIL 18, 2026 @ 12pm</p>
-        </b-col>
-        <b-col sm="12" lg="6" class="text-center">
-          <!-- image 2 -->
-          <img src="~/static/gardenplace.jpg" class="overview-img" alt="this is the place garden place venue" />
-          <h2 class="details-text mt-2">Reception</h2>
-          <h4 class="venue-title">THE GARDEN PLACE AT HERITAGE PARK</h4>
-          <p class="address-details">ADDRESS:</p>
-          <p class="address-details"><a class="address-link" href="https://maps.app.goo.gl/bYtEGDAnQoSJS6Ru7"
-              target="_blank">2601 EAST SUNNYSIDE AVE SALT LAKE CITY, UT 84108</a></p>
-          <p class="date-time">DATE & TIME</p>
-          <p class="date-time">APRIL 18, 2026 @ 3pm</p>
-        </b-col>
-      </b-row>
-      <b-row>
-        <b-col>
-          <h2 class="cursive-sub-text wedding-overview-title">Additional Reception Venue Information</h2>
-        </b-col>
-      </b-row>
-      <b-row>
-        <b-col>
-          <img src="~/static/garden-place-map-image.png" class="venue-img"
-            alt="this is the place garden place venue map image" style="border: 1px solid black;" />
-        </b-col>
-      </b-row>
-      <!-- <b-row>
-        <b-col cols="2">
-          <img src="~/static/garden-place-event-map.png" class="venue-img" alt="this is the place garden place venue map qr code" />
-        </b-col>
-      </b-row> -->
-      <b-row class="justify-content-center">
-        <b-col cols="12">
-          <h2 class="cursive-sub-text">Contribute To Our Honeymoon Fund</h2>
-        </b-col>
-      </b-row>
-      <b-row class="justify-content-center">
-        <b-col cols="12" lg="6">
-          <a id="venmo-link-desktop" href="https://account.venmo.com/u/lupitaa3" target="_blank">
-            <img src="~/static/lulu-venmo.png" class="venmo-img" alt="lulu venmo screenshot" style="width: 100%;" />
-          </a>
-          <a href="venmo://paycharge?txm-pay&recipients=lupitaa3" id="venmo-link-mobile">
-            <img src="~/static/lulu-venmo.png" class="venmo-img" alt="lulu venmo screenshot" style="width: 100%;" />
-          </a>
-        </b-col>
-      </b-row>
-    </b-container>
+    <div style="background-color: #e8e2dd;">
+      <b-container>
+        <b-row>
+          <b-col cols="12" lg="6" order="2" order-lg="1">
+            <img src="~/static/lulu-pepe-fund.jpg" alt="lulu pepe fund picture" style="width: 100%;"></img>
+          </b-col>
+          <b-col cols="12" lg="6" order="1" order-lg="2">
+            <h3 class="rsvp-title">LET US KNOW IF YOU CAN MAKE IT</h3>
+            <p class="rsvp-text">RSVP by <br /> February 28, 2026</p>
+            <p class="phone-container"><b-icon-telephone-fill></b-icon-telephone-fill><a href="sms:+18016713820">(801)
+                671-3820</a></p>
+            <div style="text-align: center;">
+              <b-button squared class="rsvp-btn" to="/rsvp">RSVP</b-button>
+            </div>
+            <h2 class="honeymoon-title mt-5">Contribute To Our Honeymoon Fund</h2>
+            <a id="venmo-link-desktop" href="https://account.venmo.com/u/lupitaa3" target="_blank">
+              <img src="~/static/lulu-venmo-na.png" class="venmo-img" alt="lulu venmo screenshot"
+                style="width: 100%;" />
+            </a>
+            <a href="venmo://paycharge?txm-pay&recipients=lupitaa3" id="venmo-link-mobile">
+              <img src="~/static/lulu-venmo-na.png" class="venmo-img" alt="lulu venmo screenshot"
+                style="width: 100%;" />
+            </a>
+          </b-col>
+        </b-row>
+      </b-container>
+    </div>
 
     <BottomFooter />
   </section>
 </template>
 
 <script>
+import { BIconTelephoneFill, BIconArrowDown } from 'bootstrap-vue';
 import TopHeader from '@/components/nav/TopHeader.vue'
 import BottomFooter from '@/components/nav/BottomFooter.vue'
 
@@ -82,6 +72,8 @@ export default {
   components: {
     TopHeader,
     BottomFooter,
+    BIconTelephoneFill,
+    BIconArrowDown,
   },
   data() {
     return {
@@ -106,68 +98,34 @@ export default {
 </script>
 
 <style scoped>
-.cursive-text, .cursive-sub-text {
+.cursive-text,
+.cursive-sub-text {
   text-align: center;
-  font-family: 'GoldenDream';  
+  font-family: 'Simple-Serenity';
 }
 
 .cursive-text {
-  font-size: 90px;
+  font-size: 210px;
 }
 
 .cursive-sub-text {
   font-size: 72px;
 }
 
-.header-img {
+.wedding-overview-subtitle {
+  font-family: 'Noto-Serif';
   text-align: center;
+  margin-top: -65px;
+}
+
+.wedding-details {
+  font-family: 'Tenor-Sans';
+  font-size: 22px;
 }
 
 .wedding-overview-title {
+  font-family: 'Simple-Serenity';
   text-align: center;
-}
-
-.overview-img {
-  /* border-radius: 50% / 100% 100% 0 0; */
-  border-radius: 200px 200px 0 0;
-  width: 50%;
-  height: 300px;
-}
-
-.venue-img {
-  width: 100%;
-}
-
-.venue-title {
-  font-family: 'RoleModel';
-  font-size: 20pt;
-}
-
-.details-text {
-  font-family: 'RoleModel';
-  font-size: 16pt;
-}
-
-.address-details {
-  font-family: 'RoleModel';
-  font-size: 16pt;
-}
-
-.address-link {
-  text-decoration: none;
-  color: black;
-  cursor: pointer;
-}
-
-.date-time {
-  font-family: 'RoleModel';
-  font-size: 16pt;
-}
-
-img.backgroundImg {
-  width: 100%;
-  opacity: .75;
-  padding-bottom: 25px;
 }
 
 .home-details {
@@ -197,13 +155,37 @@ img.backgroundImg {
 }
 
 @media only screen and (max-width:768px) {
+  .navbar-nav {
+    font-size: 18px;
+  }
+
+  .home-page {
+    min-height: 700px;
+  }
+
   .cursive-text {
     letter-spacing: 4px;
+  }
+
+  .wedding-overview-title {
+    font-size: 100px;
+  }
+
+  .wedding-overview-subtitle {
+    font-size: 62px;
   }
 
   .cursive-sub-text {
     font-size: 60px;
     letter-spacing: 5px;
+  }
+
+  .wedding-details {
+    font-size: 14px;
+  }
+
+  .arrow-container {
+    margin-top: 9rem;
   }
 
   .over-text {
@@ -220,18 +202,74 @@ img.backgroundImg {
 }
 
 @media only screen and (min-width:769px) {
+  .home-page {
+    min-height: 1200px;
+  }
+
   #venmo-link-mobile {
     display: none;
   }
+
+  .wedding-overview-subtitle {
+    font-size: 92px;
+  }
+
+  .arrow-container {
+    margin-top: 25rem;
+  }
 }
 
-@keyframes fadeInOpacity {
-  0% {
-    opacity: 0;
-  }
+.nav-background {
+  background-color: #e8e2dd;
+}
 
-  100% {
-    opacity: 1;
-  }
+.rsvp-title,
+.honeymoon-title {
+  text-align: center;
+}
+
+.rsvp-title,
+.rsvp-text,
+.honeymoon-title {
+  font-family: 'Noto-Serif';
+}
+
+.rsvp-text {
+  font-size: 18pt;
+  text-align: center;
+}
+
+.phone-container {
+  text-align: center;
+  font-size: 18pt;
+}
+
+.phone-container a {
+  text-decoration: none;
+  color: black;
+}
+
+.rsvp-btn {
+  font-size: 16pt;
+  text-align: center;
+  background-color: #3c3421;
+  color: white;
+}
+
+.page-enter-active,
+.page-leave-active {
+  transition: opacity 1s ease;
+}
+
+.page-enter-from,
+.page-enter,
+.page-leave-to {
+  opacity: 0;
+  /* filter: blur(1rem); */
+}
+
+.page-enter-to,
+.page-leave-from {
+  opacity: 1;
 }
 </style>
