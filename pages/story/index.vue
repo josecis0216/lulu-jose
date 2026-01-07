@@ -2,10 +2,18 @@
   <section style="background-color: #ccb4a6;">
     <top-header />
 
-    <b-container>
+    <b-container class="our-story">
       <b-row>
-        <b-col cols="12" lg="6" order-lg="2">
+        <b-col>
           <h1 class="header-text">Our Story</h1>
+        </b-col>
+      </b-row>
+      <b-row>
+        <b-col cols="8" lg="6" class="mb-2">
+          <img src="~/static/lulu-pepe-fund.jpg" alt="lulu and pepe image" class="our-story-image"
+            style="width: 100%;"></img>
+        </b-col>
+        <b-col cols="4" lg="6"> <!-- lg="6" order-lg="1" -->
           <div class="first-date">
             <h2 class="title-header">Our First Date:</h2>
             <p class="date-text">10.18.2019</p>
@@ -15,17 +23,13 @@
             <p class="date-text">01.10.2020</p>
           </div>
           <div class="prop-date">
-            <h2 class="title-header">Proposal Date:</h2>
+            <h2 class="title-header">Engagement Date:</h2>
             <p class="date-text">05.07.2025</p>
           </div>
           <div class="wed-date">
             <h2 class="title-header">Wedding Date:</h2>
             <p class="date-text">04.18.2026</p>
           </div>
-        </b-col>
-        <b-col cols="12" lg="6" order-lg="1" class="mb-2">
-          <img src="~/static/lulu-pepe-fund.jpg" alt="lulu and pepe image" class="our-story-image"
-            style="width: 100%;"></img>
         </b-col>
       </b-row>
       <!-- <b-row align-h="center" no-gutters>
@@ -79,6 +83,24 @@ export default {
   font-family: 'EB Garamond';
   font-size: 22pt;
   text-align: center;
+}
+
+@media only screen and (max-width: 768px) {
+  .our-story {
+    min-height: 600px;
+  }
+
+  .header-text {
+    font-size: 75px;
+  }
+
+  .title-header {
+    font-size: 14pt;
+  }
+
+  .date-text {
+    font-size: 12pt;
+  }
 }
 
 .page-enter-active,
