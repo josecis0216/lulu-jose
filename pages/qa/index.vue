@@ -12,7 +12,7 @@
 
                 <b-row>
                     <b-col cols="6" lg="4">
-                        <h4 class="question-text">Can I bring a +1?</h4>
+                        <h4 class="question-text">Can I bring a <span style="font-size: 12px;">+</span>1?</h4>
                         <p class="answer-text">
                             Due to limited space in our venue, we are only able to accomodate guests listed on the
                             invitation.
@@ -43,15 +43,13 @@
                             We are fortunate to have all that we need for our home. If you'd like to give a gift, a
                             contribution to our honeymoon fund will help us create lasting memories.
                         </p>
-                    </b-col>
-                    <b-col cols="6" lg="4">
                         <a id="venmo-link-desktop" href="https://account.venmo.com/u/lupitaa3" target="_blank">
                             <img src="~/static/venmo-icon.png" class="venmo-img"
                                 alt="venmo link for lulu honeymoon fund"
                                 style="display:inline;align-items:center; width:150px;height:150px;" />
                         </a>
-                        <a href="venmo://paycharge?txm-pay&recipients=lupitaa3" id="venmo-link-mobile"><img
-                                style="display:inline;align-items:center; width:150px;height:150px;"
+                        <a id="venmo-link-mobile" href="venmo://paycharge?txm-pay&recipients=lupitaa3"><img
+                                style="display:inline;align-items:center; width:100px;height:100px;"
                                 src="~/static/venmo-icon.png" alt="venmo link for lulu honeymoon fund" /></a>
                     </b-col>
                 </b-row>

@@ -5,9 +5,9 @@
       <b-navbar>
         <b-navbar-nav class="m-auto">
           <nuxt-link to="/" class="nav-link">HOME</nuxt-link>
-          <nuxt-link to="/rsvp" class="nav-link">RSVP</nuxt-link>
           <nuxt-link to="/about" class="nav-link">DETAILS</nuxt-link>
           <nuxt-link to="/story" class="nav-link">OUR STORY</nuxt-link>
+          <nuxt-link to="/rsvp" class="nav-link">RSVP</nuxt-link>
           <nuxt-link to="/qa" class="nav-link">Q + A</nuxt-link>
           <!-- <nuxt-link to="/addresses" class="nav-link">GIVE US YOUR ADDRESS</nuxt-link> -->
         </b-navbar-nav>

@@ -159,9 +159,7 @@ export default {
 }
 
 .overview-img {
-    /* border-radius: 50% / 100% 100% 0 0; */
     border-radius: 200px 200px 0 0;
-    width: 50%;
     height: 300px;
 }
 
@@ -221,6 +219,18 @@ img.backgroundImg {
 .line-divider {
     border: 1px dashed gray;
     width: 100%;
+}
+
+@media only screen and (max-width: 768px) {
+    .overview-img {
+        width: 100%;
+    }
+}
+
+@media only screen and (min-width: 769px) {
+    .overview-img {
+        width: 50%;
+    }
 }
 
 .page-enter-active,

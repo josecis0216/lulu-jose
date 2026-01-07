@@ -1,5 +1,6 @@
 <template>
-  <section style="background-color: #e8e2dd;">
+  <section>
+    <TopHeader />
 
     <div class="home-page">
       <b-container>
@@ -9,11 +10,7 @@
             <h2 class="wedding-overview-subtitle">Lupita & Jose</h2>
           </b-col>
         </b-row>
-        <b-row>
-          <b-col>
-            <TopHeader />
-          </b-col>
-        </b-row>
+
         <b-row align-h="between">
           <b-col cols="6" lg="4">
             <p class="wedding-details">April 18, 2026</p>
@@ -33,10 +30,10 @@
     <div style="background-color: #e8e2dd;">
       <b-container>
         <b-row>
-          <b-col cols="12" lg="6" order="2" order-lg="1">
-            <img src="~/static/lulu-pepe-fund.jpg" alt="lulu pepe fund picture" style="width: 100%;"></img>
+          <b-col cols="12" lg="6">
+            <img src="~/static/lulu-pepe-story.jpeg" alt="lulu pepe fund picture" style="width: 100%;"></img>
           </b-col>
-          <b-col cols="12" lg="6" order="1" order-lg="2">
+          <b-col cols="12" lg="6">
             <h3 class="rsvp-title">LET US KNOW IF YOU CAN MAKE IT</h3>
             <p class="rsvp-text">RSVP by <br /> February 28, 2026</p>
             <p class="phone-container"><b-icon-telephone-fill></b-icon-telephone-fill><a href="sms:+18016713820">(801)
@@ -98,6 +95,10 @@ export default {
 </script>
 
 <style scoped>
+  .home-page {
+    background-color: #e8e2dd;
+  }
+
 .cursive-text,
 .cursive-sub-text {
   text-align: center;
@@ -168,7 +169,7 @@ export default {
   }
 
   .wedding-overview-title {
-    font-size: 100px;
+    font-size: 75px;
   }
 
   .wedding-overview-subtitle {
@@ -199,11 +200,15 @@ export default {
   #venmo-link-desktop {
     display: none;
   }
+
+  .rsvp-title{
+    margin-top: 1rem;
+  }
 }
 
 @media only screen and (min-width:769px) {
   .home-page {
-    min-height: 1200px;
+    min-height: 1000px;
   }
 
   #venmo-link-mobile {
@@ -215,12 +220,8 @@ export default {
   }
 
   .arrow-container {
-    margin-top: 25rem;
+    margin-top: 6rem;
   }
-}
-
-.nav-background {
-  background-color: #e8e2dd;
 }
 
 .rsvp-title,

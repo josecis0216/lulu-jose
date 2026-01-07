@@ -23,8 +23,8 @@
             <p class="date-text">04.18.2026</p>
           </div>
         </b-col>
-        <b-col cols="12" lg="6" order-lg="1">
-          <img src="~/static/lulu-pepe-story.jpeg" alt="lulu and pepe image" class="our-story-image"
+        <b-col cols="12" lg="6" order-lg="1" class="mb-2">
+          <img src="~/static/lulu-pepe-fund.jpg" alt="lulu and pepe image" class="our-story-image"
             style="width: 100%;"></img>
         </b-col>
       </b-row>
@@ -64,7 +64,7 @@ export default {
 }
 
 .header-text {
-  font-family: 'GoldenDream';
+  font-family: 'Simple-Serenity';
   font-size: 115px;
   text-align: center;
 }
