@@ -63,7 +63,6 @@ a.nav-link {
 
 .home-details {
   text-align: center;
-  font-size: 35px;
 }
 
 .nav-background {
@@ -96,6 +95,16 @@ a.nav-link {
   .over-text {
     letter-spacing: 0px;
     font-size: 80px;
+  }
+
+  .home-details {
+    font-size: 20px;
+  }
+}
+
+@media only screen and (min-width: 769px) {
+  .home-details {
+    font-size: 35px;
   }
 }
 </style>

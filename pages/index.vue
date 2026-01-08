@@ -34,14 +34,14 @@
             <img src="~/static/lulu-pepe-story.jpeg" alt="lulu pepe fund picture" style="width: 100%;"></img>
           </b-col>
           <b-col cols="12" lg="6">
-            <h3 class="rsvp-title">LET US KNOW IF YOU CAN MAKE IT</h3>
+            <h3 class="rsvp-title">Let Us Know If You Can Make It</h3>
             <p class="rsvp-text">RSVP by <br /> February 28, 2026</p>
             <p class="phone-container"><b-icon-telephone-fill></b-icon-telephone-fill><a href="sms:+18016713820">(801)
                 671-3820</a></p>
             <div style="text-align: center;">
               <b-button squared class="rsvp-btn" to="/rsvp">RSVP</b-button>
             </div>
-            <h2 class="honeymoon-title mt-5">Contribute To Our Honeymoon Fund</h2>
+            <h3 class="honeymoon-title mt-5">Contribute To Our Honeymoon Fund</h3>
             <a id="venmo-link-desktop" href="https://account.venmo.com/u/lupitaa3" target="_blank">
               <img src="~/static/lulu-venmo-na.png" class="venmo-img" alt="lulu venmo screenshot"
                 style="width: 100%;" />
@@ -116,7 +116,6 @@ export default {
 .wedding-overview-subtitle {
   font-family: 'Noto-Serif';
   text-align: center;
-  margin-top: -65px;
 }
 
 .wedding-details {
@@ -161,7 +160,7 @@ export default {
   }
 
   .home-page {
-    min-height: 700px;
+    min-height: 400px;
   }
 
   .cursive-text {
@@ -173,7 +172,8 @@ export default {
   }
 
   .wedding-overview-subtitle {
-    font-size: 62px;
+    font-size: 42px;
+    margin-top: -35px;
   }
 
   .cursive-sub-text {
@@ -186,7 +186,7 @@ export default {
   }
 
   .arrow-container {
-    margin-top: 9rem;
+    margin-top: 3rem;
   }
 
   .over-text {
@@ -217,6 +217,7 @@ export default {
 
   .wedding-overview-subtitle {
     font-size: 92px;
+    margin-top: -65px;
   }
 
   .arrow-container {
