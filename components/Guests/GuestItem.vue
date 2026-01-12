@@ -2,22 +2,31 @@
   <li>
     <b-container>
       <b-row>
-        <b-col cols="12" lg="6">
-          <div>
-            <h2>{{ name }}</h2>
-            <p>Guest of the {{ brideOrGroom[0] }}</p>
-          </div>
+        <b-col>
+          <p>Guest ID: {{ guest_id }}</p>
+        </b-col>
+      </b-row>
+      <b-row>
+        <b-col>
+          <h2>{{ name }}</h2>
+          <p>Guest of the {{ brideOrGroom[0] }}</p>
+        </b-col>
+      </b-row>
+      <b-row>
+        <b-col>
           <p>Bringing these guests with them:</p>
           <div v-for="guest in guests" :key="guest.name">
             <p>{{ guest.name }}</p>
-            <p v-if="guest.child">{{ guest.needsOwnChair ? 'Needs own chair' : 'Doesn\'t need own chair' }}</p>
+            <!-- <p v-if="guest.child">{{ guest.needsOwnChair ? 'Needs own chair' : 'Doesn\'t need own chair' }}</p> -->
           </div>
           <p v-if="hasChildren">Has children</p>
-          <!-- <p v-for="guest in guests" :key="guest.name">
-                {{ guest.name }}
-                </p> -->
+          <!-- <input type="checkbox" id="chkHasChildren" v-model="hasChildren"></input>
+          <label for="chkHasChildren">Has Children</label> -->
         </b-col>
       </b-row>
+      <!-- <p v-for="guest in guests" :key="guest.name">
+                {{ guest.name }}
+                </p> -->
     </b-container>
   </li>
 </template>
@@ -25,6 +34,10 @@
 <script>
 export default {
   props: {
+    guest_id: {
+      type: Number,
+      default: 0
+    },
     name: {
       type: String,
       default: ''

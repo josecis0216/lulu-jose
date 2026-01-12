@@ -23,6 +23,9 @@ export default {
         addGuests(state, payload) {
             state.guests.push(payload);
         },
+        updateGuest(state, payload) {
+            state.guests.push(payload);
+        },
         setGuests(state, payload) {
             state.guests = payload;
         },
@@ -35,7 +38,7 @@ export default {
             const requestData = {
                 fullName: payload.fullName,
                 brideOrGroom: payload.brideOrGroom,
-                guests: payload.additional_guests, 
+                guests: payload.additional_guests,
                 rsvp_date: payload.rsvp_date,
                 //   message: payload.message,
             };
@@ -73,7 +76,7 @@ export default {
                     id: key,
                     fullName: responseData[key].fullName,
                     brideOrGroom: responseData[key].brideOrGroom,
-                    guests: responseData[key].guests, 
+                    guests: responseData[key].guests,
                     rsvp_date: responseData[key]?.rsvp_date,
                 };
                 requests.push(requestData);
@@ -90,6 +93,7 @@ export default {
                 hasChildren: payload.hasChildren
                 //   message: payload.message,
             };
+
             const response = await fetch(`https://clarissa-carlos-default-rtdb.firebaseio.com/guests.json`, {
                 method: 'POST',
                 body: JSON.stringify(requestData)
@@ -105,6 +109,30 @@ export default {
             requestData.id = responseData.name;
 
             context.commit('addGuests', requestData);
+        },
+        async updateGuest(context, payload) {
+            const guestID = payload.id;
+
+            const requestData = {
+                user_id: payload.user_id,
+                name: payload.name,
+                brideOrGroom: payload.brideOrGroom,
+                additionalGuests: payload.additionalGuests,
+                hasChildren: payload.hasChildren
+            };
+
+            const response = await fetch(`https://clarissa-carlos-default-rtdb.firebaseio.com/guests/${guestID}.json`, {
+                method: 'PATCH',
+                body: JSON.stringify(requestData)
+            });
+
+            const responseData = await response.json();
+
+            if (!response.ok) {
+                throw new Error(responseData.error || 'Failed to update guest.');
+            }
+
+            context.commit('updateGuest', { ...requestData });
         },
         async loadGuests(context) {
             const response = await fetch(`https://clarissa-carlos-default-rtdb.firebaseio.com/guests.json`);  // fetch(`https://vue-practice-88f8e-default-rtdb.firebaseio.com/requests/requests.json`)            

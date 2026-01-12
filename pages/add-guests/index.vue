@@ -12,7 +12,15 @@
                                     <div>
                                         <b-form @submit.prevent="onSubmit" @reset="onReset" v-if="show">
                                             <b-row>
-                                                <b-col>
+                                                <b-col cols="12" lg="2">
+                                                    <b-form-group id="input-group-0" label="Guest ID:"
+                                                        label-for="input-0">
+                                                        <b-form-input id="input-0" v-model.number="form.user_id"
+                                                            :placeholder="form.user_id">
+                                                        </b-form-input>
+                                                    </b-form-group>
+                                                </b-col>
+                                                <b-col cols="12" lg="10">
                                                     <b-form-group id="input-group-2" label="Guest Name:"
                                                         label-for="input-2">
                                                         <b-form-input id="input-2" v-model="form.name"
@@ -23,28 +31,35 @@
 
                                             <b-row>
                                                 <b-col>
-                                                    <b-button pill variant="outline-success" @click="showAddGuests" v-show="!showGuests">Add
+                                                    <b-button pill variant="outline-success" @click="showAddGuests"
+                                                        v-show="!showGuests">Add
                                                         Guest</b-button>
 
-                                                    <b-form-group v-for="(guest, k) in form.additionalGuests" :key="k" v-show="showGuests">
+                                                    <b-form-group v-for="(guest, k) in form.additionalGuests" :key="k"
+                                                        v-show="showGuests">
                                                         <b-row>
                                                             <b-col>
-                                                                <b-form-input type="text" class="form-control" placeholder="Guest Name"
+                                                                <b-form-input type="text" class="form-control"
+                                                                    placeholder="Guest Name"
                                                                     v-model="guest.name"></b-form-input>
                                                             </b-col>
                                                             <b-col>
-                                                                <b-form-checkbox v-model="guest.child">Child</b-form-checkbox>
+                                                                <b-form-checkbox
+                                                                    v-model="guest.child">Child</b-form-checkbox>
                                                             </b-col>
                                                             <b-col>
                                                                 <span>
-                                                                    <b-button pill variant="outline-danger" @click="remove(k)"
-                                                                    v-show="k || (!k && form.additionalGuests.length > 0)">Remove</b-button>                                                                    
+                                                                    <b-button pill variant="outline-danger"
+                                                                        @click="remove(k)"
+                                                                        v-show="k || (!k && form.additionalGuests.length > 0)">Remove</b-button>
                                                                 </span>
                                                             </b-col>
                                                         </b-row>
                                                         <b-row>
                                                             <b-col>
-                                                                <b-button style="margin-top:10px;" pill variant="outline-success" @click="add(k)" v-show="k == form.additionalGuests.length - 1">Add
+                                                                <b-button style="margin-top:10px;" pill
+                                                                    variant="outline-success" @click="add(k)"
+                                                                    v-show="k == form.additionalGuests.length - 1">Add
                                                                     Guest</b-button>
                                                             </b-col>
                                                         </b-row>
@@ -55,8 +70,8 @@
                                             <b-row>
                                                 <b-col>
                                                     <b-form-group id="input-group-check" v-slot="{ ariaDescribedby }">
-                                                        <b-form-checkbox-group v-model="form.brideOrGroom" id="checkboxes-2"
-                                                            :aria-describedby="ariaDescribedby">
+                                                        <b-form-checkbox-group v-model="form.brideOrGroom"
+                                                            id="checkboxes-2" :aria-describedby="ariaDescribedby">
                                                             <b-form-checkbox value="bride">Knows bride</b-form-checkbox>
                                                             <b-form-checkbox value="groom">Knows groom</b-form-checkbox>
                                                         </b-form-checkbox-group>
@@ -64,7 +79,8 @@
                                                 </b-col>
                                                 <b-col>
                                                     <b-form-group>
-                                                        <b-form-checkbox v-model="form.hasChildren">Has Children</b-form-checkbox>
+                                                        <b-form-checkbox v-model="form.hasChildren">Has
+                                                            Children</b-form-checkbox>
                                                     </b-form-group>
                                                 </b-col>
                                             </b-row>
@@ -103,17 +119,17 @@ export default {
             form: {
                 user_id: 0,
                 name: '',
-                brideOrGroom: [], 
+                brideOrGroom: [],
                 additionalGuests: [{
-                    name: '', 
+                    name: '',
                     child: false,
                     needsOwnChair: true
                 }],
                 hasChildren: false
             },
-            show: true, 
+            show: true,
             showGuests: false,
-            isLoading: false, 
+            isLoading: false,
         }
     },
     created() {
@@ -169,7 +185,7 @@ export default {
             this.$nextTick(() => {
                 this.show = true
             })
-        }, 
+        },
         clearForm() {
             this.form.name = ""
             this.form.brideOrGroom = []
