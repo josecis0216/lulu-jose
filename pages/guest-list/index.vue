@@ -12,7 +12,7 @@
                 </b-col>
             </b-row>
             <b-row>
-                <b-col v-for="req in loadedGuests" :key="req.id" cols="4">
+                <b-col v-for="req in loadedGuests" :key="req.id" cols="4" class="h-100">
                     <base-card>
                         <div v-if="isLoading">
                             <base-spinner></base-spinner>
@@ -25,34 +25,21 @@
 
                         </div>
                         <h3 v-else>You don't have any guests on your list!</h3>
-                        <button class="btn btn-sm btn-primary mt-2" @click="openEditor(req)">
+                        <button class="btn btn-sm btn-primary mt-auto" @click="openEditor(req)">
                             Edit
                         </button>
 
                         <div v-if="editingGuestId === req.id" class="mt-3">
                             <form @submit.prevent="saveGuest">
                                 <b-form-group id="input-group-1" label="Guest ID:" label-for="input-1">
-                                    <b-form-input id="input-1"
-                                        v-model="editForm.user_id">
+                                    <b-form-input id="input-1" v-model.number="editForm.user_id">
                                     </b-form-input>
                                 </b-form-group>
                                 <b-form-group id="input-group-2" label="Guest Name:" label-for="input-2">
-                                    <b-form-input id="input-2" v-model="editForm.name"
-                                        required></b-form-input>
+                                    <b-form-input id="input-2" v-model="editForm.name" required></b-form-input>
                                 </b-form-group>
 
-                                <!-- <b-form-group id="input-group-check" v-slot="{ ariaDescribedby }">
-                                    <b-form-checkbox-group v-model="editForm.brideOrGroom" id="checkboxes-2"
-                                        :aria-describedby="ariaDescribedby">
-                                        <b-form-checkbox value="bride">Knows bride</b-form-checkbox>
-                                        <b-form-checkbox value="groom">Knows groom</b-form-checkbox>
-                                    </b-form-checkbox-group>
-                                </b-form-group> -->
-
-                                <b-button pill variant="outline-success" @click="showAddGuests" v-show="!showGuests">Add
-                                    Guest</b-button>
-
-                                <b-form-group v-for="(guest, k) in editForm.additionalGuests" :key="k" v-show="showGuests">
+                                <b-form-group v-for="(guest, k) in editForm.additionalGuests" :key="k">
                                     <b-row>
                                         <b-col>
                                             <b-form-input type="text" class="form-control"
@@ -71,7 +58,7 @@
                                     <b-row>
                                         <b-col>
                                             <b-button style="margin-top:10px;" pill variant="outline-success"
-                                                @click="add(k)" v-show="k == form.additionalGuests.length - 1">Add
+                                                @click="add(k)" v-show="k == editForm.additionalGuests.length - 1">Add
                                                 Guest</b-button>
                                         </b-col>
                                     </b-row>
@@ -95,18 +82,6 @@
             </b-row>
         </b-container>
 
-         <!-- <base-card>
-                        <div v-if="isLoading">
-
-                        </div>
-                        <div v-else-if="hasGuests && !isLoading">
-                            <guest-item v-for="req in loadedGuests" :key="req.id" :guest_id="req.user_id"
-                                :name="req.name" :user-id="req.userId" :bride-or-groom="req.brideOrGroom"
-                                :guests="req.additionalGuests" :has-children="false"></guest-item>
-                        </div>
-                        <h3 v-else>You don't have any guests on your list!</h3>
-                    </base-card> -->
-
         <bottom-footer />
     </section>
 </template>
@@ -116,7 +91,7 @@ import TopHeader from '@/components/nav/TopHeader.vue'
 import BottomFooter from '@/components/nav/BottomFooter.vue'
 import GuestItem from '@/components/Guests/GuestItem.vue'
 import BaseCard from '@/components/UI/BaseCard.vue'
-import BaseDialogue from '@/components/UI/BaseDialogue.vue'
+// import BaseDialogue from '@/components/UI/BaseDialogue.vue'
 import BaseSpinner from '@/components/UI/BaseSpinner.vue'
 
 export default {
@@ -125,35 +100,24 @@ export default {
         BottomFooter,
         GuestItem,
         BaseCard,
-        BaseDialogue,
-        BaseSpinner
+        BaseSpinner,
+        BaseDialogue: () => import('@/components/UI/BaseDialogue.vue')
     },
     data() {
         return {
             isLoading: false,
             error: null,
             isEdit: false,
-            // form: {
-            //     id: null,
-            //     user_id: 0,
-            //     name: '',
-            //     brideOrGroom: [],
-            //     additionalGuests: [{
-            //         name: ''
-            //     }],
-            //     hasChildren: false
-            // },
             editingGuestId: null,
-            editForm: null
+            editForm: null,
+            showGuests: false,
         }
     },
     computed: {
         loadedGuests() {
-            //    return this.$store.getters['requests']
             return this.$store.getters.guests
         },
         hasGuests() {
-            //    return this.$store.getters['hasRequests']
             return this.$store.getters.hasGuests
         },
     },
@@ -172,35 +136,51 @@ export default {
                 this.error = new Error(error.message || 'Failed to get data')
             }
             this.isLoading = false
-            // console.log(this.$store.getters.requestsCount);
         },
         toggleEdit() {
             this.isEdit = !this.isEdit;
         },
         openEditor(guest) {
-        this.editingGuestId = guest.id;
+            this.editingGuestId = guest.id;
 
-        // Pre-fill form
-        this.editForm = {
-        id: guest.id,
-        user_id: guest.user_id,
-        name: guest.name,
-        brideOrGroom: guest.brideOrGroom,
-        additionalGuests: guest.additionalGuests,
-        hasChildren: guest.hasChildren
-        };
-    },
+            // Pre-fill form
+            this.editForm = {
+                id: guest.id,
+                user_id: guest.user_id,
+                name: guest.name,
+                brideOrGroom: guest.brideOrGroom,
+                // additionalGuests: guest.additionalGuests,
+                additionalGuests: JSON.parse(JSON.stringify(guest.additionalGuests || [])),
+                hasChildren: guest.hasChildren
+            };
+        },
 
-    async saveGuest() {
-        await this.$store.dispatch("updateGuest", this.editForm);
-        this.editingGuestId = null;
-        this.editForm = null;
-    },
+        async saveGuest() {
+            await this.$store.dispatch("updateGuest", this.editForm);
+            this.editingGuestId = null;
+            this.editForm = null;
+        },
 
-    cancelEdit() {
-        this.editingGuestId = null;
-        this.editForm = null;
-    }
+        cancelEdit() {
+            this.editingGuestId = null;
+            this.editForm = null;
+        },
+
+        showAddGuests() {
+            this.showGuests = true
+        },
+
+        add() {
+            this.editForm.additionalGuests.push({
+                name: ''
+            });
+            console.log(this.editForm.additionalGuests);
+        },
+
+        remove(index) {
+            this.editForm.additionalGuests.splice(index, 1)
+            console.log(this.editForm.additionalGuests)
+        },
     }
 }
 </script>

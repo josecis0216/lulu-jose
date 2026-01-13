@@ -15,8 +15,7 @@
                                                 <b-col cols="12" lg="2">
                                                     <b-form-group id="input-group-0" label="Guest ID:"
                                                         label-for="input-0">
-                                                        <b-form-input id="input-0" v-model.number="form.user_id"
-                                                            :placeholder="form.user_id">
+                                                        <b-form-input id="input-0" v-model.number="form.user_id">
                                                         </b-form-input>
                                                     </b-form-group>
                                                 </b-col>

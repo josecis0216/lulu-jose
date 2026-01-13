@@ -74,6 +74,7 @@
 
 <script>
 import { Date } from 'core-js';
+// import { mapState } from "vuex";
 import TopHeader from '@/components/nav/TopHeader.vue'
 import BottomFooter from '@/components/nav/BottomFooter.vue'
 
@@ -111,10 +112,14 @@ export default {
     },
     hasGuests() {
       return this.$store.getters.hasGuests
-    }
+    },
+    // ...mapState({
+    //   form: (state) => state.guestForm,
+    // })
   },
   created() {
     this.loadGuests()
+    // await this.$store.dispatch("loadRsvpGuest", this.$route.query.id);
   },
   methods: {
     async loadGuests() {
@@ -129,9 +134,12 @@ export default {
     },
 
     getGuest() {
-      this.form.user_id = parseInt(this.$route.query.id);
+      // this.$store.dispatch('loadRsvpGuest', this.form.user_id);
+
       //  this.addGuest = this.$route.query.addGuest;
       this.addGuest = !this.$route.query.id && this.$route.query.id !== '';
+
+      this.form.user_id = parseInt(this.$route.query.id);
 
       this.loadedGuests.forEach(guest => {
         if (this.form.user_id === guest.user_id) {
@@ -160,6 +168,7 @@ export default {
     },
 
     onSubmit(event) {
+      this.form.rsvp_date = new Date();
       this.$store.dispatch('rsvp', this.form).then(() => {
         alert('Thank you for responding, can\'t wait to celebrate with you!')
         this.$router.push('/')

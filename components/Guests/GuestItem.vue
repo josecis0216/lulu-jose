@@ -65,7 +65,7 @@ export default {
 <style scoped>
 li {
   margin: 1rem 0;
-  border: 1px solid #ccc;
+  /* border: 1px solid #ccc; */
   padding: 1rem;
   list-style-type: none;
 }

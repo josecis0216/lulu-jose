@@ -1,3 +1,5 @@
+// import { auth } from '@/firebase/index.js';
+
 export default {
     state() {
         return {
@@ -5,6 +7,7 @@ export default {
             addresses: [],
             guests: [],
             guestCount: 0,
+            guestForm: null,
         };
     },
     mutations: {
@@ -26,15 +29,25 @@ export default {
         updateGuest(state, updated) {
             //  state.guests.push(payload);
             const index = state.guests.findIndex(g => g.id === updated.id);
+
             if (index !== -1) {
-                state.guests.splice(index, 1, updated);
+                state.guests[index] = {
+                    ...updated,
+                    additionalGuests: [...updated.additionalGuests]
+                };
             }
+            // if (index !== -1) {
+            //     state.guests.splice(index, 1, updated);
+            // }
         },
         setGuests(state, payload) {
             state.guests = payload;
         },
         setGuestCount(state, payload) {
             state.guestCount = payload;
+        },
+        setGuestForm(state, payload) {
+            state.guestForm = payload;
         }
     },
     actions: {
@@ -159,11 +172,35 @@ export default {
                     hasChildren: responseData[key].hasChildren
                 };
                 loadedGuests.push(requestData);
-                // console.log(requestData);
             }
             context.commit('setGuests', loadedGuests);
             context.commit('setGuestCount', loadedGuests.length);
         },
+        // async loadRsvpGuest(context, payload) {
+        //     const uid = auth.currentUser.uid;
+        //     const url = `https://clarissa-carlos-default-rtdb.firebaseio.com/guests.json?orderBy="user_id"&equalTo="${uid}"`;
+
+        //     const response = await fetch(url);
+        //     const data = await response.json();
+
+        //     if (!response.ok) {
+        //         throw new Error(data.Error || "Failed to fetch guest");
+        //     }
+
+        //     // Firebase returns an object keyed by ID
+        //     const guests = [];
+        //     for (const key in data) {
+        //         guests.push({ id: key, ...data[key] });
+        //     }
+
+        //     // Return the first (should be only) RSVP for this user
+        //     const guest = guests[0] || null;
+
+        //     console.log(guest);
+
+        //     // Commit to Vuex store for editing
+        //     context.commit("setGuestForm", guest ? { ...guest } : null);
+        // }
     },
     getters: {
         requests(state) {  // _, _2, rootGetters
