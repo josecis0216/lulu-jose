@@ -23,8 +23,12 @@ export default {
         addGuests(state, payload) {
             state.guests.push(payload);
         },
-        updateGuest(state, payload) {
-            state.guests.push(payload);
+        updateGuest(state, updated) {
+            //  state.guests.push(payload);
+            const index = state.guests.findIndex(g => g.id === updated.id);
+            if (index !== -1) {
+                state.guests.splice(index, 1, updated);
+            }
         },
         setGuests(state, payload) {
             state.guests = payload;
@@ -132,7 +136,7 @@ export default {
                 throw new Error(responseData.error || 'Failed to update guest.');
             }
 
-            context.commit('updateGuest', { ...requestData });
+            context.commit('updateGuest', { id: guestID, ...requestData });
         },
         async loadGuests(context) {
             const response = await fetch(`https://clarissa-carlos-default-rtdb.firebaseio.com/guests.json`);  // fetch(`https://vue-practice-88f8e-default-rtdb.firebaseio.com/requests/requests.json`)            

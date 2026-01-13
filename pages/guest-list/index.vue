@@ -2,7 +2,7 @@
     <section>
         <top-header />
 
-        <b-container v-show="!isEdit">
+        <b-container>
             <b-row>
                 <b-col>
                     <h1>Guest List</h1>
@@ -12,7 +12,7 @@
                 </b-col>
             </b-row>
             <b-row>
-                <b-col v-for="req in loadedGuests" :key="req.id" cols="6">
+                <b-col v-for="req in loadedGuests" :key="req.id" cols="4">
                     <base-card>
                         <div v-if="isLoading">
                             <base-spinner></base-spinner>
@@ -21,12 +21,81 @@
 
                             <guest-item :guest_id="req.user_id" :name="req.name" :user-id="req.userId"
                                 :bride-or-groom="req.brideOrGroom" :guests="req.additionalGuests"
-                                :has-children="false"></guest-item>
+                                :has-children="req.hasChildren"></guest-item>
 
                         </div>
                         <h3 v-else>You don't have any guests on your list!</h3>
+                        <button class="btn btn-sm btn-primary mt-2" @click="openEditor(req)">
+                            Edit
+                        </button>
+
+                        <div v-if="editingGuestId === req.id" class="mt-3">
+                            <form @submit.prevent="saveGuest">
+                                <b-form-group id="input-group-1" label="Guest ID:" label-for="input-1">
+                                    <b-form-input id="input-1"
+                                        v-model="editForm.user_id">
+                                    </b-form-input>
+                                </b-form-group>
+                                <b-form-group id="input-group-2" label="Guest Name:" label-for="input-2">
+                                    <b-form-input id="input-2" v-model="editForm.name"
+                                        required></b-form-input>
+                                </b-form-group>
+
+                                <!-- <b-form-group id="input-group-check" v-slot="{ ariaDescribedby }">
+                                    <b-form-checkbox-group v-model="editForm.brideOrGroom" id="checkboxes-2"
+                                        :aria-describedby="ariaDescribedby">
+                                        <b-form-checkbox value="bride">Knows bride</b-form-checkbox>
+                                        <b-form-checkbox value="groom">Knows groom</b-form-checkbox>
+                                    </b-form-checkbox-group>
+                                </b-form-group> -->
+
+                                <b-button pill variant="outline-success" @click="showAddGuests" v-show="!showGuests">Add
+                                    Guest</b-button>
+
+                                <b-form-group v-for="(guest, k) in editForm.additionalGuests" :key="k" v-show="showGuests">
+                                    <b-row>
+                                        <b-col>
+                                            <b-form-input type="text" class="form-control"
+                                                v-model="guest.name"></b-form-input>
+                                        </b-col>
+                                        <b-col>
+                                            <b-form-checkbox v-model="guest.child">Child</b-form-checkbox>
+                                        </b-col>
+                                        <b-col>
+                                            <span>
+                                                <b-button pill variant="outline-danger" @click="remove(k)"
+                                                    v-show="k || (!k && editForm.additionalGuests.length > 0)">Remove</b-button>
+                                            </span>
+                                        </b-col>
+                                    </b-row>
+                                    <b-row>
+                                        <b-col>
+                                            <b-button style="margin-top:10px;" pill variant="outline-success"
+                                                @click="add(k)" v-show="k == form.additionalGuests.length - 1">Add
+                                                Guest</b-button>
+                                        </b-col>
+                                    </b-row>
+                                </b-form-group>
+
+                                <label>
+                                    <input type="checkbox" v-model="editForm.hasChildren" />
+                                    Has Children
+                                </label>
+
+                                <div class="mt-2">
+                                    <button class="btn btn-success btn-sm">Save</button>
+                                    <button class="btn btn-secondary btn-sm" @click="cancelEdit">
+                                        Cancel
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
                     </base-card>
-                    <!-- <base-card>
+                </b-col>
+            </b-row>
+        </b-container>
+
+         <!-- <base-card>
                         <div v-if="isLoading">
 
                         </div>
@@ -37,24 +106,6 @@
                         </div>
                         <h3 v-else>You don't have any guests on your list!</h3>
                     </base-card> -->
-                </b-col>
-            </b-row>
-        </b-container>
-
-        <b-container v-show="isEdit">
-            <b-row>
-                <b-col v-for="(guest, k) in loadedGuests" :key="k" cols="6">
-                    <b-form @submit.prevent="onSubmit">
-                        <b-form-group id="input-group-0" label="Guest ID:" label-for="input-0">
-                            <b-form-input id="input-0" v-model.number="guest.user_id">
-                            </b-form-input>
-                        </b-form-group>
-
-                        <b-button type="submit" variant="primary">Update Guest</b-button>
-                    </b-form>
-                </b-col>
-            </b-row>
-        </b-container>
 
         <bottom-footer />
     </section>
@@ -82,15 +133,18 @@ export default {
             isLoading: false,
             error: null,
             isEdit: false,
-            form: {
-                user_id: 0,
-                name: '',
-                brideOrGroom: [],
-                additionalGuests: [{
-                    name: ''
-                }],
-                hasChildren: false
-            }
+            // form: {
+            //     id: null,
+            //     user_id: 0,
+            //     name: '',
+            //     brideOrGroom: [],
+            //     additionalGuests: [{
+            //         name: ''
+            //     }],
+            //     hasChildren: false
+            // },
+            editingGuestId: null,
+            editForm: null
         }
     },
     computed: {
@@ -123,16 +177,30 @@ export default {
         toggleEdit() {
             this.isEdit = !this.isEdit;
         },
-        onSubmit(event) {
-            console.log(this.form);
-            // this.$store.dispatch('updateGuest', this.form).then(() => {
-            // alert('Guest has been updated to db.');
-            // this.$router.push('/');
-            // this.clearForm();
-            // })
-            // console.log('SUCCESS! Guest was updated');
-            // this.loadGuestCount();
-        },
+        openEditor(guest) {
+        this.editingGuestId = guest.id;
+
+        // Pre-fill form
+        this.editForm = {
+        id: guest.id,
+        user_id: guest.user_id,
+        name: guest.name,
+        brideOrGroom: guest.brideOrGroom,
+        additionalGuests: guest.additionalGuests,
+        hasChildren: guest.hasChildren
+        };
+    },
+
+    async saveGuest() {
+        await this.$store.dispatch("updateGuest", this.editForm);
+        this.editingGuestId = null;
+        this.editForm = null;
+    },
+
+    cancelEdit() {
+        this.editingGuestId = null;
+        this.editForm = null;
+    }
     }
 }
 </script>
