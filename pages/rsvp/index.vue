@@ -14,10 +14,13 @@
                 <!-- <b-button pill variant="outline-success" @click="showAddGuests" v-show="!showGuests">Add
                   Guest</b-button> -->
 
-                <b-form-group v-for="(guest, k) in form.additional_guests" :key="k" v-show="hasGuests"
+                <b-form-group v-for="(guest, k) in form.additional_guests" :key="k" v-show="form.additional_guests && form.additional_guests.length > 0"
                   label="Guest in your party:" class="additional-guest-container">
                   <b-form-input type="text" class="form-control" placeholder="Guest Name"
                     v-model="guest.name"></b-form-input>
+                    <span>
+                    <b-form-checkbox v-model="form.needsOwnChair" v-show="guest.child">Child</b-form-checkbox>
+                    </span>
                   <span>
                     <b-button pill variant="outline-danger" @click="remove(k)"
                       v-show="k || (!k && form.additional_guests.length > 1)">Remove</b-button>
@@ -63,12 +66,6 @@
     </div>
 
     <bottom-footer />
-
-    <!-- <div>
-      <b-card class="mt-3" header="Form Data Result">
-        <pre class="m-0">{{ form }}</pre>
-      </b-card>
-    </div> -->
   </section>
 </template>
 
@@ -96,7 +93,9 @@ export default {
         fullName: '',
         brideOrGroom: [],
         additional_guests: [{
-          name: ''
+          name: '',
+          child: false,
+          needsOwnChair: false,
         }],
         rsvp_date: new Date(),
         hasChildren: false,
@@ -108,10 +107,7 @@ export default {
   },
   computed: {
     loadedGuests() {
-      return this.$store.getters.guests
-    },
-    hasGuests() {
-      return this.$store.getters.hasGuests
+      return this.$store.getters.guests;
     },
     // ...mapState({
     //   form: (state) => state.guestForm,
@@ -144,11 +140,16 @@ export default {
       this.loadedGuests.forEach(guest => {
         if (this.form.user_id === guest.user_id) {
           this.form.fullName = guest.name;
-          this.form.additional_guests = [...guest.additionalGuests];
+          this.form.additional_guests = [...guest.additionalGuests || []];
+          this.form.additional_guests.forEach(g => {
+            g.child = guest.child;
+          });
           this.form.rsvp_date = new Date();
           this.form.hasChildren = guest.hasChildren;
         }
       });
+
+      console.log(this.form.additional_guests);
     },
 
     showAddGuests() {

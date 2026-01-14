@@ -7,9 +7,9 @@
                         <!-- <h5>
                             <nuxt-link to="/addresses">GIVE US YOUR ADDRESS</nuxt-link>
                         </h5> -->
-                        <h5 style="color:white;">
+                        <!-- <h5 style="color:white;">
                             <nuxt-link to="/rsvp">RSVP</nuxt-link>
-                        </h5>
+                        </h5> -->
                         <h5 style="color:white;">
                             <nuxt-link to="/story">OUR STORY</nuxt-link>
                         </h5>
