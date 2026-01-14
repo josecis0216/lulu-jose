@@ -8,53 +8,50 @@
             <b-card class="card-container">
               <b-form v-if="show" @submit.prevent="onSubmit" @reset="onReset" class="rsvp-form">
                 <b-form-group id="input-group-1" label="Your Name:" label-for="input-1">
-                  <b-form-input id="input-1" v-model="form.fullName" placeholder="Enter name" required></b-form-input>
+                  <!-- <b-form-input id="input-1" v-model="form.fullName" placeholder="Enter name" required></b-form-input> -->
+                  <p>{{ form.fullName }}</p>
                 </b-form-group>
 
                 <!-- <b-button pill variant="outline-success" @click="showAddGuests" v-show="!showGuests">Add
                   Guest</b-button> -->
 
-                <b-form-group v-for="(guest, k) in form.additional_guests" :key="k" v-show="form.additional_guests && form.additional_guests.length > 0"
-                  label="Guest in your party:" class="additional-guest-container">
-                  <b-form-input type="text" class="form-control" placeholder="Guest Name"
-                    v-model="guest.name"></b-form-input>
-                    <span>
-                    <b-form-checkbox v-model="form.needsOwnChair" v-show="guest.child">Child</b-form-checkbox>
+                <div v-show="form.additional_guests && form.additional_guests.length > 0">
+                  <h4>Guests in your party:</h4>
+                  <b-form-group v-for="(guest, k) in form.additional_guests" :key="k"
+                    class="additional-guest-container">
+                    <!-- <b-form-input type="text" class="form-control" placeholder="Guest Name"
+                      v-model="guest.name"></b-form-input> -->
+                    <p class="inline-elements" style="min-width: 100px;">{{ guest.name }}</p>
+                    <span class="inline-elements">
+                      <b-button pill variant="outline-danger" @click="remove(k)"
+                        v-show="k || (!k && form.additional_guests.length > 1)">Remove</b-button>
                     </span>
-                  <span>
-                    <b-button pill variant="outline-danger" @click="remove(k)"
-                      v-show="k || (!k && form.additional_guests.length > 1)">Remove</b-button>
-                  </span>
-                </b-form-group>
+                    <span v-show="guest.child && !form.hasChildren">
+                      <b-form-checkbox v-model="form.additional_guests[k].needsOwnChair">Check this box if {{ guest.name
+                      }}
+                        needs their own chair</b-form-checkbox>
+                    </span>
+                    <span v-show="guest.child && form.hasChildren">
+                      <p>{{ guest.name }} is welcome to be at the reception; however, due to limited seating we cannot
+                        guarantee them their own chair.</p>
+                    </span>
+                  </b-form-group>
+                </div>
+
                 <b-form-group>
                   <b-button pill variant="outline-success" @click="add(k)" v-show="addGuest">Add
                     Guest</b-button>
                 </b-form-group>
 
-                <!-- <b-form-group v-for="(guest, k) in form.guests" :key="k" v-show="showGuests && this.$store.getters.hasGuests">
-                  <b-form-input type="text" class="form-control" placeholder="Guest Name"
-                    v-model="guest.name"></b-form-input>
-                  <span>
-                    <b-button pill variant="outline-danger" @click="remove(k)"
-                      v-show="k || (!k && form.guests.length > 1)">Remove</b-button>
-                    <b-button pill variant="outline-success" @click="add(k)" v-show="k == form.guests.length - 1">Add
-                      Guest</b-button>
-                  </span>
-                </b-form-group> -->
+                <!-- <p v-show="">say here we are limited on seating, so we want to know if you can lap your baby.</p> -->
 
-
-                <b-form-group id="input-group-check" v-slot="{ ariaDescribedby }">
+                <!-- <b-form-group id="input-group-check" v-slot="{ ariaDescribedby }">
                   <b-form-checkbox-group v-model="form.brideOrGroom" id="checkboxes-2"
                     :aria-describedby="ariaDescribedby">
                     <b-form-checkbox value="bride">I know the bride</b-form-checkbox>
                     <b-form-checkbox value="groom">I know the groom</b-form-checkbox>
                   </b-form-checkbox-group>
-                </b-form-group>
-
-                <p v-show="form.hasChildren">Your children are welcome to be at the reception; however, due to limited
-                  seating we cannot
-                  guarantee them their own chair.
-                </p>
+                </b-form-group> -->
 
                 <b-button type="submit" variant="primary">Submit</b-button>
                 <b-button type="reset" variant="danger">Reset</b-button>
@@ -67,6 +64,16 @@
 
     <bottom-footer />
   </section>
+  <!-- <b-form-group v-for="(guest, k) in form.guests" :key="k" v-show="showGuests && this.$store.getters.hasGuests">
+                  <b-form-input type="text" class="form-control" placeholder="Guest Name"
+                    v-model="guest.name"></b-form-input>
+                  <span>
+                    <b-button pill variant="outline-danger" @click="remove(k)"
+                      v-show="k || (!k && form.guests.length > 1)">Remove</b-button>
+                    <b-button pill variant="outline-success" @click="add(k)" v-show="k == form.guests.length - 1">Add
+                      Guest</b-button>
+                  </span>
+                </b-form-group> -->
 </template>
 
 <script>
@@ -82,8 +89,8 @@ export default {
   },
   mounted() {
     const id = this.$route.query.id;
-    const name = this.$route.query.name;
-    this.fullName = name;
+    // const name = this.$route.query.name;
+    // this.fullName = name;
     this.id = id;
   },
   data() {
@@ -100,8 +107,9 @@ export default {
         rsvp_date: new Date(),
         hasChildren: false,
       },
+      // form: null,
+      submitRsvp: null,
       show: true,
-      showGuests: false,
       addGuest: false,
     }
   },
@@ -115,7 +123,6 @@ export default {
   },
   created() {
     this.loadGuests()
-    // await this.$store.dispatch("loadRsvpGuest", this.$route.query.id);
   },
   methods: {
     async loadGuests() {
@@ -129,27 +136,47 @@ export default {
       this.isLoading = false;
     },
 
+    // getGuest() {
+    //   //  this.addGuest = this.$route.query.addGuest;
+    //   this.addGuest = !this.$route.query.id && this.$route.query.id !== '';
+
+    //   this.form.user_id = parseInt(this.$route.query.id);
+
+    //   this.loadedGuests.forEach(guest => {
+    //     if (this.form.user_id === guest.user_id) {
+    //       this.form.fullName = guest.name;
+    //       // this.form.additional_guests = [...guest.additionalGuests || []];
+    //       this.form.additional_guests.forEach(g => {
+    //         this.form.additional_guests.child = guest.child;
+    //       });
+    //       this.form.rsvp_date = new Date();
+    //       this.form.hasChildren = guest.hasChildren;
+    //     }
+    //   });
+    // },
     getGuest() {
-      // this.$store.dispatch('loadRsvpGuest', this.form.user_id);
-
-      //  this.addGuest = this.$route.query.addGuest;
       this.addGuest = !this.$route.query.id && this.$route.query.id !== '';
-
       this.form.user_id = parseInt(this.$route.query.id);
 
-      this.loadedGuests.forEach(guest => {
-        if (this.form.user_id === guest.user_id) {
-          this.form.fullName = guest.name;
-          this.form.additional_guests = [...guest.additionalGuests || []];
-          this.form.additional_guests.forEach(g => {
-            g.child = guest.child;
-          });
-          this.form.rsvp_date = new Date();
-          this.form.hasChildren = guest.hasChildren;
-        }
+      const guest = this.loadedGuests.find(
+        g => g.user_id === this.form.user_id
+      );
+
+      if (!guest) return;
+
+      this.form.fullName = guest.name;
+
+      // 🔑 DEEP CLONE (fixes Vuex error)
+      this.form.additional_guests = JSON.parse(
+        JSON.stringify(guest.additionalGuests || [])
+      );
+
+      this.form.additional_guests.forEach(g => {
+        this.form.additional_guests.child = guest.child;
       });
 
-      console.log(this.form.additional_guests);
+      this.form.hasChildren = guest.hasChildren;
+      this.form.rsvp_date = new Date();
     },
 
     showAddGuests() {
@@ -169,7 +196,6 @@ export default {
     },
 
     onSubmit(event) {
-      this.form.rsvp_date = new Date();
       this.$store.dispatch('rsvp', this.form).then(() => {
         alert('Thank you for responding, can\'t wait to celebrate with you!')
         this.$router.push('/')
@@ -211,6 +237,14 @@ export default {
 .rsvp-form {
   font-weight: bold;
 }
+
+.inline-elements {
+  display: inline-block;
+  /* Makes both elements sit side-by-side */
+  margin-right: 10px;
+  /* Optional: adds spacing between them */
+}
+
 
 @media only screen and (max-width: 768px) {
   .card-container {

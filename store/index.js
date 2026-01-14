@@ -94,7 +94,7 @@ export default {
                     fullName: responseData[key].fullName,
                     brideOrGroom: responseData[key].brideOrGroom,
                     guests: responseData[key].guests,
-                    rsvp_date: responseData[key]?.rsvp_date,
+                    rsvp_date: responseData[key].rsvp_date,
                 };
                 requests.push(requestData);
                 // console.log(requestData);

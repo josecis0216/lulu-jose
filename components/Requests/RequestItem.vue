@@ -2,17 +2,25 @@
   <li>
     <div>
       <h2>{{ fullName }}</h2>
-      <p>Guest of the {{ brideOrGroom[0] }}</p>
+      <p>Guest of the {{ brideOrGroom.toString() }}</p>
     </div>
     <p>Bringing these guests with them:</p>
-    <p v-for="guest in guests" :key="guest.name">
-      {{ guest.name }}
+    <div v-for="guest in guests" :key="guest.name">
+      <p class="inline-elements">
+        {{ guest.name }}
+      </p>
+      <p v-show="guest.child && guest.needsOwnChair" class="inline-elements">
+        needs their own chair
+      </p>
+      <p v-show="guest.child && !guest.needsOwnChair" class="inline-elements">
+        doesn't need chair
+      </p>
+    </div>
+    <p>
+      RSVP Date:
     </p>
     <p>
-      RSVP Date: 
-    </p>
-    <p>
-      {{ rsvpDate }}
+      {{ new Intl.DateTimeFormat('en-US').format(rsvp_date) }}
     </p>
   </li>
 </template>
@@ -35,7 +43,7 @@ export default {
       default() {
         return [{ name: '' }]
       }
-    }, 
+    },
     rsvpDate: {
       type: Date,
       default: ''
@@ -65,5 +73,12 @@ a:active {
 
 p {
   margin: 0.5rem 0 0 0;
+}
+
+.inline-elements {
+  display: inline-block;
+  /* Makes both elements sit side-by-side */
+  margin-right: 10px;
+  /* Optional: adds spacing between them */
 }
 </style>

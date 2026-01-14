@@ -3,9 +3,9 @@ import "firebase/auth";
 import "firebase/database";
 
 const firebaseConfig = {
-    apiKey: "AIzaSyCDk6Pz_EACAo8JrE7ztrJRx2m8_WTP4mA",
+    apiKey: process.env.FIREBASE_API_KEY,
     authDomain: "clarissa-carlos.firebaseapp.com",
-    databaseURL: "https://clarissa-carlos-default-rtdb.firebaseio.com",
+    databaseURL: process.env.DATABASE_URL,
     projectId: "clarissa-carlos",
     storageBucket: "clarissa-carlos.firebasestorage.app",
     messagingSenderId: "346512949428",

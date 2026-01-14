@@ -1,29 +1,36 @@
 <template>
-    <div>
+    <section>
         <top-header />
+        <b-container>
+            <b-row>
+                <b-col>
+                    <h1>Responses</h1>
+                    <base-dialogue :show="!!error" title="An error occured!!" @close="handleError">
+                        <p>{{ error }}</p>
+                    </base-dialogue>
+                </b-col>
+            </b-row>
 
-        <base-dialogue :show="!!error" title="An error occured!!" @close="handleError">
-            <p>{{ error }}</p>
-        </base-dialogue>
-        <base-card>
-            <header>
-                <h2>Responses Received</h2>
-            </header>
-            <div v-if="isLoading">
-                <base-spinner></base-spinner>
-            </div>
-            <div v-else-if="hasResponses && !isLoading">
-                <request-item 
-                    v-for="req in receivedResponses" :key="req.id" :full-name="req.fullName"
-                    :bride-or-groom="req.brideOrGroom" :guests="req.guests" :rsvp_date="req.rsvpDate"></request-item>
-            </div>
-            <h3 v-else>You haven't received any responses yet!</h3>
-        </base-card>
+            <b-row>
+                <b-col v-for="req in receivedResponses" :key="req.id" cols="4" class="h-100">
+                    <base-card>
+                        <div v-if="isLoading">
+                            <base-spinner></base-spinner>
+                        </div>
+                        <div v-else-if="hasResponses && !isLoading">
+                            <request-item :key="req.id" :full-name="req.fullName" :bride-or-groom="req.brideOrGroom"
+                                :guests="req.guests" :rsvp_date="req.rsvp_date"></request-item>
+                        </div>
+                        <h3 v-else>You haven't received any responses yet!</h3>
+                    </base-card>
+                </b-col>
+            </b-row>
+        </b-container>
 
         <bottom-footer />
-    </div>
+    </section>
 </template>
-  
+
 <script>
 import TopHeader from '@/components/nav/TopHeader.vue'
 import BottomFooter from '@/components/nav/BottomFooter.vue'
@@ -77,4 +84,3 @@ export default {
     },
 }
 </script>
-  
