@@ -22,6 +22,10 @@
     <p>
       {{ new Intl.DateTimeFormat('en-US').format(rsvp_date) }}
     </p>
+    <p class="inline-items">
+      Response:
+      <strong> {{ attending }} </strong>
+    </p>
   </li>
 </template>
 
@@ -46,6 +50,10 @@ export default {
     },
     rsvpDate: {
       type: Date,
+      default: ''
+    },
+    attending: {
+      type: String,
       default: ''
     }
   },

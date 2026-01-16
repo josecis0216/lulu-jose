@@ -53,6 +53,13 @@
                   </b-form-checkbox-group>
                 </b-form-group> -->
 
+                <b-form-group label="Are you attending?" v-slot="{ ariaDescribedby }">
+                  <b-form-radio v-model="form.attending" :aria-describedby="ariaDescribedby" name="some-radios"
+                    value="Attending">Attending</b-form-radio>
+                  <b-form-radio v-model="form.attending" :aria-describedby="ariaDescribedby" name="some-radios"
+                    value="Not Attending">Not Attending</b-form-radio>
+                </b-form-group>
+
                 <b-button type="submit" variant="primary">Submit</b-button>
                 <b-button type="reset" variant="danger">Reset</b-button>
               </b-form>
@@ -106,6 +113,7 @@ export default {
         }],
         rsvp_date: new Date(),
         hasChildren: false,
+        attending: null,
       },
       // form: null,
       submitRsvp: null,
@@ -197,9 +205,13 @@ export default {
 
     onSubmit(event) {
       this.$store.dispatch('rsvp', this.form).then(() => {
-        alert('Thank you for responding, can\'t wait to celebrate with you!')
+        if (this.form.attending === 'Attending') {
+          alert('Thank you for responding, can\'t wait to celebrate with you!');
+        } else {
+          alert('Thank you for letting us know, we will miss you at the celebration!');
+        }
         this.$router.push('/')
-      })
+      });
       console.log('SUCCESS! Form was submitted')
     },
     onReset(event) {

@@ -57,6 +57,7 @@ export default {
                 brideOrGroom: payload.brideOrGroom,
                 guests: payload.additional_guests,
                 rsvp_date: payload.rsvp_date,
+                attending: payload.attending,
                 //   message: payload.message,
             };
             // const response = await fetch(`https://clarissa-carlos-default-rtdb.firebaseio.com/newRequests.json`, { // fetch(`https://vue-practice-88f8e-default-rtdb.firebaseio.com/requests/requests.json`
@@ -95,6 +96,7 @@ export default {
                     brideOrGroom: responseData[key].brideOrGroom,
                     guests: responseData[key].guests,
                     rsvp_date: responseData[key].rsvp_date,
+                    attending: responseData[key].attending,
                 };
                 requests.push(requestData);
                 // console.log(requestData);

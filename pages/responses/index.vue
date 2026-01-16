@@ -19,7 +19,8 @@
                         </div>
                         <div v-else-if="hasResponses && !isLoading">
                             <request-item :key="req.id" :full-name="req.fullName" :bride-or-groom="req.brideOrGroom"
-                                :guests="req.guests" :rsvp_date="req.rsvp_date"></request-item>
+                                :guests="req.guests" :rsvp_date="req.rsvp_date"
+                                :attending="req.attending"></request-item>
                         </div>
                         <h3 v-else>You haven't received any responses yet!</h3>
                     </base-card>
