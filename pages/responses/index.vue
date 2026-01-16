@@ -12,7 +12,7 @@
             </b-row>
 
             <b-row>
-                <b-col v-for="req in receivedResponses" :key="req.id" cols="4" class="h-100">
+                <b-col v-for="req in receivedResponses" :key="req.id" cols="12" lg="4" class="h-100">
                     <base-card>
                         <div v-if="isLoading">
                             <base-spinner></base-spinner>

@@ -34,13 +34,13 @@
             <img src="~/static/lulu-pepe-story.jpeg" alt="lulu pepe fund picture" style="width: 100%;"></img>
           </b-col>
           <b-col cols="12" lg="6">
-            <h3 class="rsvp-title">Let Us Know If You Can Make It</h3>
+            <!-- <h3 class="rsvp-title">Let Us Know If You Can Make It</h3>
             <p class="rsvp-text">RSVP by <br /> February 28, 2026</p>
             <p class="phone-container"><b-icon-telephone-fill></b-icon-telephone-fill><a href="sms:+18016713820">(801)
                 671-3820</a></p>
             <div style="text-align: center;">
               <b-button squared class="rsvp-btn" to="/rsvp">RSVP</b-button>
-            </div>
+            </div> -->
             <h3 class="honeymoon-title mt-5">Contribute To Our Honeymoon Fund</h3>
             <a id="venmo-link-desktop" href="https://account.venmo.com/u/lupitaa3" target="_blank">
               <img src="~/static/lulu-venmo-na.png" class="venmo-img" alt="lulu venmo screenshot"
@@ -60,7 +60,7 @@
 </template>
 
 <script>
-import { BIconTelephoneFill, BIconArrowDown } from 'bootstrap-vue';
+import { BIconArrowDown } from 'bootstrap-vue'; // BIconTelephoneFill,
 import TopHeader from '@/components/nav/TopHeader.vue'
 import BottomFooter from '@/components/nav/BottomFooter.vue'
 
@@ -69,7 +69,7 @@ export default {
   components: {
     TopHeader,
     BottomFooter,
-    BIconTelephoneFill,
+    // BIconTelephoneFill,
     BIconArrowDown,
   },
   data() {
